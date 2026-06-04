@@ -27,6 +27,9 @@
   <!-- Your rank (only shows in Ranked mode) -->
   <p id="rank" class="rank" style="display:none"></p>
 
+  <!-- Find a real opponent online (only shows in Ranked mode) -->
+  <button id="find-online" class="online-btn" style="display:none">🌐 Find Online Match</button>
+
   <!-- How many guesses are left, and the win/lose message -->
   <p id="status" class="subtitle">Guess the mystery player</p>
 
@@ -55,6 +58,8 @@
   <script src="data/mlb.js"></script>
   <!-- 2) Load the game (uses that data). -->
   <script src="game.js"></script>
+  <!-- 3) Load the online-ranked client (safe to load even with no server). -->
+  <script src="online.js"></script>
 
 </body>
 </html>

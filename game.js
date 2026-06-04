@@ -307,6 +307,12 @@ function submitGuess(player) {
   input.value = "";
   dropdown.innerHTML = "";
 
+  // Online matches are refereed by the server (see online.js).
+  if (mode === "online") {
+    onlineAfterGuess(result.win);
+    return;
+  }
+
   if (result.win) endGame(true);
   else if (guessesLeft <= 0) endGame(false);
   else updateStatus();
@@ -365,6 +371,11 @@ function endGame(solved) {
 }
 
 function newGame() {
+  // In an online match, "New Game" looks for a new opponent (handled in online.js).
+  if (mode === "online") {
+    findOnlineMatch();
+    return;
+  }
   players = playable(sportKey);
   if (mode === "ranked") {
     oppRating = rank.rating;

@@ -1,0 +1,8 @@
+# Node packages installed when running the server
+server/node_modules/
+
+# Live data the server writes
+server/ratings.json
+
+# Local auto-refresh log
+scripts/refresh.log

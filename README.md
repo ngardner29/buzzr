@@ -56,11 +56,17 @@ python3 scripts/fetch_players.py nba      # just one
   launchctl load ~/Library/LaunchAgents/com.sportsguesser.refresh.plist
   ```
 
+## Online Ranked (race a real person)
+
+The code for real online ranked is built — see **`server/`** and **`online.js`**.
+To play it you need to run/deploy the small server: follow **`server/README.md`**.
+Until then, Ranked uses the offline AI ghost (no setup needed).
+
 ## Still to come
 
 - 🎨 Visual design polish.
-- 🌐 Real online Ranked (two real people racing live) — needs a hosted server.
-  The ranked scoring (Elo) is already built; deploying a server swaps the ghost
-  for a real opponent.
+- 🌐 Deploy the server + game so friends can play online from anywhere
+  (steps in `server/README.md`).
+- 👤 Accounts + a global leaderboard (currently rank is per-browser).
 
 Data comes from ESPN's free public API.

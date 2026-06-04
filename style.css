@@ -84,6 +84,23 @@ h1 {
   letter-spacing: 0.3px;
 }
 
+/* "Find Online Match" button */
+.online-btn {
+  margin-top: 16px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #2f6fed;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.online-btn:hover {
+  background: #4480ff;
+}
+
 /* The box that holds the search input + dropdown */
 .search-box {
   position: relative;     /* so the dropdown can sit right under the input */
