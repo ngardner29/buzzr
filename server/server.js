@@ -15,7 +15,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { WebSocketServer } = require("ws");
+const { WebSocket, WebSocketServer } = require("ws");
 
 const PORT = process.env.PORT || 8080;
 const RATINGS_FILE = path.join(__dirname, "ratings.json");
@@ -52,7 +52,7 @@ function elo(rating, opponent, score) {
 const queues = { nba: [], nfl: [], mlb: [] };
 
 function send(ws, obj) {
-  if (ws.readyState === ws.OPEN) {
+  if (ws.readyState === WebSocket.OPEN) {
     try {
       ws.send(JSON.stringify(obj));
     } catch (e) {}
@@ -72,12 +72,12 @@ function tryMatch(sport) {
   while (q.length >= 2) {
     const a = q.shift();
     const b = q.shift();
-    if (a.readyState !== a.OPEN) {
-      if (b.readyState === b.OPEN) q.unshift(b);
+    if (a.readyState !== WebSocket.OPEN) {
+      if (b.readyState === WebSocket.OPEN) q.unshift(b);
       continue;
     }
-    if (b.readyState !== b.OPEN) {
-      if (a.readyState === a.OPEN) q.unshift(a);
+    if (b.readyState !== WebSocket.OPEN) {
+      if (a.readyState === WebSocket.OPEN) q.unshift(a);
       continue;
     }
     startMatch(a, b, sport);
