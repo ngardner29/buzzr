@@ -172,6 +172,7 @@ function compareGuess(guess, secret, sport) {
 /* ---------- 5) Game state ---------- */
 
 let sportKey = "nba";
+let mode = "daily"; // "daily" = same player for everyone today, "free" = random
 let sport = SPORTS[sportKey];
 let players = playable(sportKey);
 let secret = pickSecret();
@@ -179,7 +180,17 @@ let guessesLeft = MAX_GUESSES;
 let gameOver = false;
 let guessedNames = new Set();
 
+// In Daily mode, pick a player from today's date so everyone gets the same one.
+function dailyIndex(key, n) {
+  const now = new Date();
+  const dayNum = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+  let h = dayNum >>> 0;
+  for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0; // mix in the sport
+  return h % n;
+}
+
 function pickSecret() {
+  if (mode === "daily") return players[dailyIndex(sportKey, players.length)];
   return players[Math.floor(Math.random() * players.length)];
 }
 
@@ -192,6 +203,7 @@ const statusEl = document.getElementById("status");
 const header = document.getElementById("board-header");
 const newGameBtn = document.getElementById("new-game");
 const tabs = document.querySelectorAll(".tab");
+const modeBtns = document.querySelectorAll(".mode-btn");
 
 /* ---------- 7) Drawing the board ---------- */
 
@@ -249,15 +261,17 @@ function submitGuess(player) {
 }
 
 function updateStatus() {
+  const tag = mode === "daily" ? "Daily" : "Free Play";
   statusEl.textContent =
-    "Guess the mystery " + sport.name + " player — " + guessesLeft + " guesses left";
+    tag + " · Guess the mystery " + sport.name + " player — " + guessesLeft + " guesses left";
 }
 
 function endGame(won) {
   gameOver = true;
+  const hint = mode === "daily" ? " (Switch to Free Play to keep playing.)" : "";
   statusEl.textContent = won
-    ? "🎉 You got it! It was " + secret.name + "."
-    : "❌ Out of guesses! It was " + secret.name + ".";
+    ? "🎉 You got it! It was " + secret.name + "." + hint
+    : "❌ Out of guesses! It was " + secret.name + "." + hint;
 }
 
 function newGame() {
@@ -281,8 +295,16 @@ function switchSport(key) {
   newGame();
 }
 
+function switchMode(m) {
+  if (m === mode) return;
+  mode = m;
+  modeBtns.forEach((b) => b.classList.toggle("active", b.dataset.mode === m));
+  newGame();
+}
+
 newGameBtn.addEventListener("click", newGame);
 tabs.forEach((t) => t.addEventListener("click", () => switchSport(t.dataset.sport)));
+modeBtns.forEach((b) => b.addEventListener("click", () => switchMode(b.dataset.mode)));
 
 /* ---------- 9) Search box + dropdown ---------- */
 

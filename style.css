@@ -52,6 +52,30 @@ h1 {
   border-color: #f5a623;
 }
 
+/* ---- Daily / Free Play toggle ---- */
+.modes {
+  display: flex;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.mode-btn {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #9aa4b2;
+  background: transparent;
+  border: 2px solid #2a3340;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.mode-btn.active {
+  color: #ffffff;
+  border-color: #4a8f3c;
+  background: #356b2b;
+}
+
 /* The box that holds the search input + dropdown */
 .search-box {
   position: relative;     /* so the dropdown can sit right under the input */
