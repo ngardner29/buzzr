@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Local auto-refresh for macOS.
+  This re-runs the roster fetcher every day at 4:00 AM while your Mac is on,
+  so the players stay current without you doing anything.
+
+  Install:
+    cp scripts/com.sportsguesser.refresh.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.sportsguesser.refresh.plist
+
+  Remove later:
+    launchctl unload ~/Library/LaunchAgents/com.sportsguesser.refresh.plist
+    rm ~/Library/LaunchAgents/com.sportsguesser.refresh.plist
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.sportsguesser.refresh</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/python3</string>
+    <string>/Users/noahgardner/sports-guesser/scripts/fetch_players.py</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/noahgardner/sports-guesser</string>
+
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>4</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+
+  <key>StandardOutPath</key>
+  <string>/Users/noahgardner/sports-guesser/scripts/refresh.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/noahgardner/sports-guesser/scripts/refresh.log</string>
+</dict>
+</plist>

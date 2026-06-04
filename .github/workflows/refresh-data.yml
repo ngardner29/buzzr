@@ -1,0 +1,32 @@
+# Automatically refresh the player rosters every day.
+# This runs in the cloud once you push the project to GitHub — no computer needed.
+name: Refresh player data
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # every day at 09:00 UTC
+  workflow_dispatch: {} # also lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write # allow it to commit the refreshed data files
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Fetch the latest rosters
+        run: python3 scripts/fetch_players.py
+
+      - name: Commit the changes (only if something changed)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/*.js
+          git diff --staged --quiet || git commit -m "Auto-refresh rosters"
+          git push

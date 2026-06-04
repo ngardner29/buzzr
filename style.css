@@ -76,6 +76,14 @@ h1 {
   background: #356b2b;
 }
 
+/* Rank line shown in Ranked mode */
+.rank {
+  margin: 16px 0 -8px;
+  font-weight: 700;
+  color: #f5a623;
+  letter-spacing: 0.3px;
+}
+
 /* The box that holds the search input + dropdown */
 .search-box {
   position: relative;     /* so the dropdown can sit right under the input */

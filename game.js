@@ -172,7 +172,10 @@ function compareGuess(guess, secret, sport) {
 /* ---------- 5) Game state ---------- */
 
 let sportKey = "nba";
-let mode = "daily"; // "daily" = same player for everyone today, "free" = random
+let mode = "daily"; // "daily" = same player for everyone today, "free" = random, "ranked" = race a ghost
+let ghostTarget = null; // ranked: how many guesses the AI opponent needs this round
+let oppRating = null; // ranked: the opponent's rating this round
+let rank = loadRank(); // ranked: persisted { rating, wins, losses }
 let sport = SPORTS[sportKey];
 let players = playable(sportKey);
 let secret = pickSecret();
@@ -191,7 +194,55 @@ function dailyIndex(key, n) {
 
 function pickSecret() {
   if (mode === "daily") return players[dailyIndex(sportKey, players.length)];
-  return players[Math.floor(Math.random() * players.length)];
+  return players[Math.floor(Math.random() * players.length)]; // free + ranked are random
+}
+
+/* ---------- Ranked: rating, tiers, and the AI "ghost" opponent ----------
+   This is the same Elo math real online ranked uses. Today you race a ghost;
+   later, when there's a server, the ghost becomes a real opponent. */
+
+function clamp(v, lo, hi) {
+  return Math.max(lo, Math.min(hi, v));
+}
+
+// Read/save your rank from the browser so it's remembered between visits.
+function loadRank() {
+  try {
+    return JSON.parse(localStorage.getItem("sg_rank")) || { rating: 1000, wins: 0, losses: 0 };
+  } catch (e) {
+    return { rating: 1000, wins: 0, losses: 0 };
+  }
+}
+function saveRank(r) {
+  try {
+    localStorage.setItem("sg_rank", JSON.stringify(r));
+  } catch (e) {}
+}
+
+// Turn a rating number into a tier name.
+function tierOf(rating) {
+  if (rating < 900) return "Bronze";
+  if (rating < 1100) return "Silver";
+  if (rating < 1300) return "Gold";
+  if (rating < 1500) return "Platinum";
+  return "Diamond";
+}
+
+// Decide how many guesses the ghost opponent needs (tougher as your rating climbs).
+function ghostGuesses(rating) {
+  return clamp(Math.round(5 - (rating - 1000) / 250) + (Math.floor(Math.random() * 3) - 1), 2, 6);
+}
+
+// Update your rating after a ranked round using the Elo formula.
+function applyRankResult(won) {
+  const expected = 1 / (1 + Math.pow(10, (oppRating - rank.rating) / 400));
+  const K = 32;
+  const before = rank.rating;
+  rank.rating = Math.round(rank.rating + K * ((won ? 1 : 0) - expected));
+  if (won) rank.wins++;
+  else rank.losses++;
+  saveRank(rank);
+  return rank.rating - before; // how many points you gained/lost
 }
 
 /* ---------- 6) Page elements ---------- */
@@ -200,6 +251,7 @@ const input = document.getElementById("player-input");
 const dropdown = document.getElementById("dropdown");
 const rows = document.getElementById("rows");
 const statusEl = document.getElementById("status");
+const rankEl = document.getElementById("rank");
 const header = document.getElementById("board-header");
 const newGameBtn = document.getElementById("new-game");
 const tabs = document.querySelectorAll(".tab");
@@ -261,21 +313,63 @@ function submitGuess(player) {
 }
 
 function updateStatus() {
-  const tag = mode === "daily" ? "Daily" : "Free Play";
-  statusEl.textContent =
-    tag + " · Guess the mystery " + sport.name + " player — " + guessesLeft + " guesses left";
+  if (mode === "ranked") {
+    statusEl.textContent =
+      "🏆 Ranked " + sport.name + " — beat the opponent (solves in " + ghostTarget + ") · " +
+      rank.rating + " " + tierOf(rank.rating) + " · " + guessesLeft + " guesses left";
+  } else {
+    const tag = mode === "daily" ? "Daily" : "Free Play";
+    statusEl.textContent =
+      tag + " · Guess the mystery " + sport.name + " player — " + guessesLeft + " guesses left";
+  }
 }
 
-function endGame(won) {
+// Show the rank line (rating, tier, win/loss) only in ranked mode.
+function updateRankDisplay() {
+  if (!rankEl) return;
+  if (mode === "ranked") {
+    rankEl.style.display = "";
+    rankEl.textContent =
+      "Rank: " + rank.rating + " (" + tierOf(rank.rating) + ") · " +
+      rank.wins + "W " + rank.losses + "L";
+  } else {
+    rankEl.style.display = "none";
+  }
+}
+
+function endGame(solved) {
   gameOver = true;
+
+  if (mode === "ranked") {
+    const used = MAX_GUESSES - guessesLeft;
+    const beat = solved && used <= ghostTarget; // you must solve at least as fast as the ghost
+    const delta = applyRankResult(beat);
+    const sign = delta >= 0 ? "+" : "";
+    let msg;
+    if (solved) {
+      msg = beat
+        ? "🏆 Solved in " + used + " — you beat the opponent (" + ghostTarget + ")! "
+        : "😬 Solved in " + used + ", but the opponent only needed " + ghostTarget + ". ";
+    } else {
+      msg = "❌ Out of guesses! It was " + secret.name + ". ";
+    }
+    statusEl.textContent = msg + sign + delta + " RP → " + rank.rating + " (" + tierOf(rank.rating) + ")";
+    updateRankDisplay();
+    return;
+  }
+
   const hint = mode === "daily" ? " (Switch to Free Play to keep playing.)" : "";
-  statusEl.textContent = won
+  statusEl.textContent = solved
     ? "🎉 You got it! It was " + secret.name + "." + hint
     : "❌ Out of guesses! It was " + secret.name + "." + hint;
 }
 
 function newGame() {
   players = playable(sportKey);
+  if (mode === "ranked") {
+    oppRating = rank.rating;
+    ghostTarget = ghostGuesses(oppRating);
+  }
   secret = pickSecret();
   guessesLeft = MAX_GUESSES;
   gameOver = false;
@@ -284,6 +378,7 @@ function newGame() {
   input.value = "";
   dropdown.innerHTML = "";
   updateStatus();
+  updateRankDisplay();
 }
 
 function switchSport(key) {
@@ -374,3 +469,4 @@ document.addEventListener("click", function (e) {
 /* ---------- 10) Start ---------- */
 applyColumns();
 updateStatus();
+updateRankDisplay();
