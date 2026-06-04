@@ -1,0 +1,187 @@
+/* ---- Sports Guesser styles ---- */
+
+/* The whole page: dark background, centered content */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: system-ui, -apple-system, Arial, sans-serif;
+  background: #0f1419;
+  color: #f1f1f1;
+}
+
+h1 {
+  margin-top: 48px;
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  color: #9aa4b2;
+  margin-top: 8px;
+  margin-bottom: 28px;
+}
+
+/* ---- Sport tabs (NBA / NFL / MLB) ---- */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.tab {
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #c7ced8;
+  background: #1a2129;
+  border: 2px solid #2a3340;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.tab:hover {
+  border-color: #3a4554;
+}
+
+.tab.active {
+  color: #0f1419;
+  background: #f5a623;
+  border-color: #f5a623;
+}
+
+/* The box that holds the search input + dropdown */
+.search-box {
+  position: relative;     /* so the dropdown can sit right under the input */
+  width: 340px;
+}
+
+#player-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 2px solid #2a3340;
+  border-radius: 10px;
+  background: #1a2129;
+  color: #ffffff;
+  outline: none;
+}
+
+#player-input:focus {
+  border-color: #f5a623;   /* orange highlight, like our "close" clue color */
+}
+
+/* The dropdown list of matching players */
+#dropdown {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  background: #1a2129;
+  border: 2px solid #2a3340;
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+/* Each row in the dropdown */
+#dropdown li {
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#dropdown li:hover,
+#dropdown li.active {
+  background: #2a3340;
+}
+
+/* The grey team label on the right of each row */
+.team-label {
+  color: #9aa4b2;
+  font-size: 0.85rem;
+}
+
+/* Hide the dropdown when it has no items */
+#dropdown:empty {
+  display: none;
+}
+
+/* ---- The guessing board ---- */
+
+.board-wrap {
+  margin-top: 28px;
+  max-width: 95vw;
+  overflow-x: auto;        /* lets you scroll sideways on a narrow phone */
+}
+
+/* Header row and each guess row share the SAME columns so they line up. */
+.board-grid {
+  display: grid;
+  grid-template-columns: 150px repeat(7, 70px);
+  gap: 6px;
+}
+
+.board-header {
+  margin-bottom: 6px;
+}
+
+/* One box in the grid. */
+.cell {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.82rem;
+  border-radius: 8px;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+
+/* The wider left-hand box holding the player's name. */
+.cell.name {
+  justify-content: flex-start;
+  font-weight: 600;
+  background: #1a2129;
+}
+
+/* Column-title boxes. */
+.cell.head {
+  background: transparent;
+  color: #9aa4b2;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  height: auto;
+}
+
+/* The three clue colors. */
+.clue.green  { background: #4a8f3c; color: #ffffff; }
+.clue.orange { background: #c98a2b; color: #ffffff; }
+.clue.gray   { background: #2a3340; color: #c7ced8; }
+
+/* New Game button. */
+.new-game {
+  margin-top: 26px;
+  padding: 12px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f1419;
+  background: #f5a623;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.new-game:hover {
+  background: #ffb733;
+}

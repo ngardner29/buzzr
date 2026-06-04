@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Guesser</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <h1>Sports Guesser</h1>
+
+  <!-- Pick a sport. Each one plays exactly the same way. -->
+  <div class="tabs">
+    <button class="tab active" data-sport="nba">🏀 NBA</button>
+    <button class="tab" data-sport="nfl">🏈 NFL</button>
+    <button class="tab" data-sport="mlb">⚾ MLB</button>
+  </div>
+
+  <!-- How many guesses are left, and the win/lose message -->
+  <p id="status" class="subtitle">Guess the mystery player</p>
+
+  <!-- The search area: a text box with a dropdown that appears underneath -->
+  <div class="search-box">
+    <input
+      id="player-input"
+      type="text"
+      placeholder="Type a player and press Enter…"
+      autocomplete="off"
+    />
+    <ul id="dropdown"></ul>
+  </div>
+
+  <!-- The board. The header and each guess row are filled in by game.js. -->
+  <div class="board-wrap">
+    <div class="board-grid board-header" id="board-header"></div>
+    <div id="rows" class="board-grid"></div>
+  </div>
+
+  <button id="new-game" class="new-game">New Game</button>
+
+  <!-- 1) Load the player data for all three sports. -->
+  <script src="data/nba.js"></script>
+  <script src="data/nfl.js"></script>
+  <script src="data/mlb.js"></script>
+  <!-- 2) Load the game (uses that data). -->
+  <script src="game.js"></script>
+
+</body>
+</html>
