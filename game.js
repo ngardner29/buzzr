@@ -182,8 +182,9 @@ let guessedNames = new Set();
 
 // In Daily mode, pick a player from today's date so everyone gets the same one.
 function dailyIndex(key, n) {
+  // Use UTC so everyone on Earth gets the SAME player on the same calendar day.
   const now = new Date();
-  const dayNum = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+  const dayNum = Math.floor(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) / 86400000);
   let h = dayNum >>> 0;
   for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0; // mix in the sport
   return h % n;
