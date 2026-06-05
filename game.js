@@ -206,16 +206,17 @@ function clamp(v, lo, hi) {
 }
 
 // Read/save your rank from the browser so it's remembered between visits.
+// New players start at 700 = Copper (the lowest rank).
 function loadRank() {
   try {
-    return JSON.parse(localStorage.getItem("sg_rank")) || { rating: 1000, wins: 0, losses: 0 };
+    return JSON.parse(localStorage.getItem("sg_rank2")) || { rating: 700, wins: 0, losses: 0 };
   } catch (e) {
-    return { rating: 1000, wins: 0, losses: 0 };
+    return { rating: 700, wins: 0, losses: 0 };
   }
 }
 function saveRank(r) {
   try {
-    localStorage.setItem("sg_rank", JSON.stringify(r));
+    localStorage.setItem("sg_rank2", JSON.stringify(r));
   } catch (e) {}
 }
 

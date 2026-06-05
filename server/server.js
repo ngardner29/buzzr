@@ -30,7 +30,7 @@ try {
 }
 
 function record(id) {
-  if (!ratings[id]) ratings[id] = { rating: 1000, wins: 0, losses: 0, draws: 0 };
+  if (!ratings[id]) ratings[id] = { rating: 700, wins: 0, losses: 0, draws: 0 }; // 700 = Copper
   return ratings[id];
 }
 function saveRatings() {
