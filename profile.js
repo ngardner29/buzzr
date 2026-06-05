@@ -160,12 +160,10 @@ playRanked.addEventListener("click", () => startRanked(false));
 playOnline.addEventListener("click", () => startRanked(true));
 
 /* ---------- Start ---------- */
+// Ranked + login launch later, so we don't prompt for a username on first visit.
+// Daily and Unlimited play work with no account at all.
 const usingFirebase = typeof firebaseConfigured === "function" && firebaseConfigured();
-if (usingFirebase) {
-  // auth.js drives the login screen and shows the profile chip after sign-in.
-} else if (!getUsername()) {
-  openAccountModal();
-} else {
+if (!usingFirebase && getUsername()) {
   profileChip.style.display = "";
   refreshProfileUI();
 }

@@ -804,3 +804,24 @@ h1 {
   color: var(--accent-bright);
   font-weight: 800;
 }
+
+/* ---- Ranked "Coming Soon" ---- */
+.coming-soon {
+  display: inline-block;
+  margin: 2px 0 14px;
+  padding: 6px 18px;
+  font-family: var(--body);
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--r-pill);
+  background: rgba(255, 178, 36, 0.08);
+}
+.ranks-all {
+  width: min(640px, 92vw);
+  height: auto;
+  margin-top: 20px;
+}
