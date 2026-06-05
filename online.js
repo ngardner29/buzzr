@@ -140,6 +140,7 @@ function onlineAfterGuess(won) {
 
 function showOnlineResult(msg) {
   gameOver = true;
+  if (msg.outcome !== "win") revealSecret(); // show who it was at the bottom
   onlineRating = msg.newRating;
   const sign = msg.delta >= 0 ? "+" : "";
   const label =

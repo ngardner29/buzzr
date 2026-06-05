@@ -30,12 +30,9 @@ function cmpExact(field) {
   return (g, s) => ({ color: g[field] === s[field] ? "green" : "gray", arrow: "" });
 }
 
-// Team: green = same team, orange = same conference/league, gray = otherwise.
+// Team: green = same team, gray = otherwise. (Never orange.)
 function cmpTeam() {
-  return (g, s) => ({
-    color: g.team === s.team ? "green" : g.conference === s.conference ? "orange" : "gray",
-    arrow: "",
-  });
+  return (g, s) => ({ color: g.team === s.team ? "green" : "gray", arrow: "" });
 }
 
 // Division: green only if same division AND same conference (names like
@@ -331,6 +328,22 @@ function submitGuess(player) {
   else updateStatus();
 }
 
+// Reveal the secret player as a final row (all green = it's them) so you see their stats.
+function revealSecret() {
+  const result = compareGuess(secret, secret, sport);
+  const nameCell = document.createElement("div");
+  nameCell.className = "cell name answer";
+  nameCell.textContent = "★ " + secret.name;
+  rows.appendChild(nameCell);
+  result.clues.forEach(function (clue, i) {
+    const cell = document.createElement("div");
+    cell.className = "cell clue " + clue.color;
+    cell.style.animationDelay = i * 0.06 + "s";
+    cell.textContent = clue.value + (clue.arrow ? " " + clue.arrow : "");
+    rows.appendChild(cell);
+  });
+}
+
 function updateStatus() {
   if (mode === "ranked") {
     statusEl.textContent =
@@ -356,6 +369,7 @@ function updateRankDisplay() {
 
 function endGame(solved) {
   gameOver = true;
+  if (!solved) revealSecret(); // show who it was + their stats at the bottom
 
   if (mode === "ranked") {
     const used = MAX_GUESSES - guessesLeft;

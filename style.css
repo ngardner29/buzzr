@@ -796,3 +796,11 @@ h1 {
   transition: border-color 0.15s, transform 0.12s;
 }
 .ghost-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+/* The revealed "answer" player row (shown when you lose) */
+.cell.name.answer {
+  background: linear-gradient(180deg, rgba(255, 178, 36, 0.22), rgba(255, 178, 36, 0.07));
+  border-color: var(--accent);
+  color: var(--accent-bright);
+  font-weight: 800;
+}

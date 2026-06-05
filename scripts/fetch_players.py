@@ -149,6 +149,7 @@ def fetch_sport(sport):
             bats = (a.get("bats") or {}).get("abbreviation", "") if isinstance(a.get("bats"), dict) else ""
             throws = (a.get("throws") or {}).get("abbreviation", "") if isinstance(a.get("throws"), dict) else ""
             players.append({
+                "id": str(a.get("id", "")),
                 "name": a.get("fullName", ""),
                 "team": nickname,
                 "teamFull": team_full,
@@ -183,6 +184,59 @@ def write_js(sport, players):
     print(f"  -> wrote {len(players)} players to data/{sport}.js")
 
 
+STATS_BASE = "https://site.web.api.espn.com/apis/common/v3/sports"
+
+
+def fetch_stats(path):
+    """Return {athlete_id: {gamesPlayed, avgMinutes}} for the regular season.
+
+    This is how we keep only players who actually contributed (known players)
+    instead of every deep-bench / practice-squad name.
+    """
+    stats = {}
+    page, pages = 1, 1
+    while page <= pages:
+        url = (
+            f"{STATS_BASE}/{path}/statistics/byathlete"
+            f"?region=us&lang=en&contentorigin=espn&isqualified=false&seasontype=2&page={page}&limit=200"
+        )
+        try:
+            data = get_json(url)
+        except Exception as err:
+            print(f"  ! stats fetch error: {err}")
+            break
+        pages = data.get("pagination", {}).get("pages", 1)
+        cats = data.get("categories", [])
+        # Locate gamesPlayed / avgMinutes within the per-athlete category arrays.
+        loc = {}
+        for c in cats:
+            for vi, n in enumerate(c.get("names") or []):
+                loc.setdefault(n, (c.get("name"), vi))
+        for a in data.get("athletes", []):
+            aid = str(a.get("athlete", {}).get("id"))
+            acats = {ac.get("name"): (ac.get("values") or []) for ac in a.get("categories", [])}
+
+            def stat(name):
+                if name not in loc:
+                    return None
+                cname, vi = loc[name]
+                vals = acats.get(cname, [])
+                return vals[vi] if vi < len(vals) else None
+
+            stats[aid] = {"gamesPlayed": stat("gamesPlayed"), "avgMinutes": stat("avgMinutes")}
+        page += 1
+        time.sleep(0.1)
+    return stats
+
+
+# Keep a player only if they meet the "known / contributor" bar for their sport.
+KNOWN = {
+    "nba": lambda s: (s.get("avgMinutes") or 0) >= 12 and (s.get("gamesPlayed") or 0) >= 10,
+    "nfl": lambda s: (s.get("gamesPlayed") or 0) >= 8,
+    "mlb": lambda s: (s.get("gamesPlayed") or 0) >= 25,
+}
+
+
 def main():
     # Allow: python3 fetch_players.py nba   (one sport)  or  no args (all sports)
     wanted = sys.argv[1:] or list(SPORTS.keys())
@@ -192,6 +246,12 @@ def main():
             continue
         print(f"\n=== {sport.upper()} ===")
         players = fetch_sport(sport)
+        print("  fetching season stats to keep known players…")
+        stats = fetch_stats(SPORTS[sport]["path"])
+        keep = KNOWN[sport]
+        before = len(players)
+        players = [p for p in players if keep(stats.get(p["id"], {}))]
+        print(f"  known-player filter: {before} -> {len(players)}")
         write_js(sport, players)
     print("\nDone.")
 
