@@ -4,53 +4,68 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sports Guesser</title>
+
+  <!-- Distinctive fonts: Anton (athletic display) + Archivo (clean body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <h1>Sports Guesser</h1>
+  <main class="app">
 
-  <!-- Pick a sport. Each one plays exactly the same way. -->
-  <div class="tabs">
-    <button class="tab active" data-sport="nba">🏀 NBA</button>
-    <button class="tab" data-sport="nfl">🏈 NFL</button>
-    <button class="tab" data-sport="mlb">⚾ MLB</button>
-  </div>
+    <header class="masthead">
+      <h1>Sports Guesser</h1>
+      <p class="tagline">Daily Player Showdown · NBA · NFL · MLB</p>
+    </header>
 
-  <!-- Daily = same player for everyone today. Free Play = random, replayable. -->
-  <div class="modes">
-    <button class="mode-btn active" data-mode="daily">Daily</button>
-    <button class="mode-btn" data-mode="free">Free Play</button>
-    <button class="mode-btn" data-mode="ranked">🏆 Ranked</button>
-  </div>
+    <!-- Pick a sport. Each one plays exactly the same way. -->
+    <div class="tabs">
+      <button class="tab active" data-sport="nba">🏀 NBA</button>
+      <button class="tab" data-sport="nfl">🏈 NFL</button>
+      <button class="tab" data-sport="mlb">⚾ MLB</button>
+    </div>
 
-  <!-- Your rank (only shows in Ranked mode) -->
-  <p id="rank" class="rank" style="display:none"></p>
+    <!-- Daily = same player for everyone today. Free Play = random. Ranked = race. -->
+    <div class="modes">
+      <button class="mode-btn active" data-mode="daily">Daily</button>
+      <button class="mode-btn" data-mode="free">Free Play</button>
+      <button class="mode-btn" data-mode="ranked">🏆 Ranked</button>
+    </div>
 
-  <!-- Find a real opponent online (only shows in Ranked mode) -->
-  <button id="find-online" class="online-btn" style="display:none">🌐 Find Online Match</button>
+    <!-- Your rank (only shows in Ranked mode) -->
+    <p id="rank" class="rank" style="display:none"></p>
 
-  <!-- How many guesses are left, and the win/lose message -->
-  <p id="status" class="subtitle">Guess the mystery player</p>
+    <!-- Find a real opponent online (only shows in Ranked mode) -->
+    <button id="find-online" class="online-btn" style="display:none">🌐 Find Online Match</button>
 
-  <!-- The search area: a text box with a dropdown that appears underneath -->
-  <div class="search-box">
-    <input
-      id="player-input"
-      type="text"
-      placeholder="Type a player and press Enter…"
-      autocomplete="off"
-    />
-    <ul id="dropdown"></ul>
-  </div>
+    <!-- How many guesses are left, and the win/lose message -->
+    <p id="status" class="status">Guess the mystery player</p>
 
-  <!-- The board. The header and each guess row are filled in by game.js. -->
-  <div class="board-wrap">
-    <div class="board-grid board-header" id="board-header"></div>
-    <div id="rows" class="board-grid"></div>
-  </div>
+    <!-- The search area: a text box with a dropdown that appears underneath -->
+    <div class="search-box">
+      <input
+        id="player-input"
+        type="text"
+        placeholder="Type a player and press Enter…"
+        autocomplete="off"
+      />
+      <ul id="dropdown"></ul>
+    </div>
 
-  <button id="new-game" class="new-game">New Game</button>
+    <!-- The board. The header and each guess row are filled in by game.js. -->
+    <div class="board-wrap">
+      <div class="board-grid board-header" id="board-header"></div>
+      <div id="rows" class="board-grid"></div>
+    </div>
+
+    <button id="new-game" class="new-game">New Game</button>
+
+  </main>
 
   <!-- 1) Load the player data for all three sports. -->
   <script src="data/nba.js"></script>

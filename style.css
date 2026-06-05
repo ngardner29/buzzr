@@ -1,236 +1,396 @@
-/* ---- Sports Guesser styles ---- */
+/* ============================================================
+   Sports Guesser — "Stadium Night" theme
+   ============================================================ */
 
-/* The whole page: dark background, centered content */
+:root {
+  --bg: #080b11;
+  --bg-2: #0d1320;
+  --panel: #141c2b;
+  --panel-2: #1c2738;
+  --line: #28344a;
+  --line-soft: #1e2940;
+
+  --text: #eef2f9;
+  --muted: #8896ad;
+
+  --accent: #ffb224;        /* stadium amber */
+  --accent-bright: #ffc34d;
+  --accent-deep: #e08c00;
+
+  --green: #2fbd77;
+  --green-d: #1d8e56;
+  --orange: #f0913a;
+  --orange-d: #c66f24;
+  --tile-gray: #29344a;
+  --tile-gray-tx: #aebaccf2;
+  --blue: #3f86ff;
+  --blue-d: #2a6ae6;
+
+  --r: 14px;
+  --r-sm: 10px;
+  --r-pill: 999px;
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.4);
+
+  --display: "Anton", system-ui, sans-serif;
+  --body: "Archivo", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
 body {
-  margin: 0;
   min-height: 100vh;
+  font-family: var(--body);
+  color: var(--text);
+  background:
+    radial-gradient(1100px 520px at 50% -180px, rgba(255, 178, 36, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 90% 0%, rgba(63, 134, 255, 0.08), transparent 55%),
+    linear-gradient(180deg, var(--bg-2), var(--bg) 60%);
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  padding: 40px 18px 80px;
+}
+
+/* Faint film-grain overlay for texture */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: system-ui, -apple-system, Arial, sans-serif;
-  background: #0f1419;
-  color: #f1f1f1;
+  text-align: center;
 }
+
+/* Staggered entrance for the top of the page */
+.app > * { animation: fadeUp 0.6s both; }
+.masthead { animation-delay: 0.02s; }
+.tabs { animation-delay: 0.10s; }
+.modes { animation-delay: 0.16s; }
+.status { animation-delay: 0.22s; }
+.search-box { animation-delay: 0.28s; }
+.board-wrap { animation-delay: 0.34s; }
+.new-game { animation-delay: 0.40s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---- Masthead ---- */
+.masthead { margin-bottom: 22px; }
 
 h1 {
-  margin-top: 48px;
-  font-size: 2rem;
-  letter-spacing: 0.5px;
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 4.2rem);
+  line-height: 0.92;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #fff 18%, var(--accent-bright) 75%, var(--accent-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 38px rgba(255, 178, 36, 0.25);
 }
 
-.subtitle {
-  color: #9aa4b2;
-  margin-top: 8px;
-  margin-bottom: 28px;
+.tagline {
+  margin: 10px 0 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-/* ---- Sport tabs (NBA / NFL / MLB) ---- */
+/* ---- Sport tabs (segmented) ---- */
 .tabs {
   display: flex;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 6px;
+  padding: 6px;
+  background: var(--panel);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-pill);
+  box-shadow: var(--shadow-sm);
 }
 
 .tab {
-  padding: 10px 18px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #c7ced8;
-  background: #1a2129;
-  border: 2px solid #2a3340;
-  border-radius: 10px;
+  padding: 9px 20px;
+  font-family: var(--body);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--r-pill);
   cursor: pointer;
+  transition: color 0.18s, background 0.18s, transform 0.12s;
 }
 
-.tab:hover {
-  border-color: #3a4554;
-}
+.tab:hover { color: var(--text); transform: translateY(-1px); }
 
 .tab.active {
-  color: #0f1419;
-  background: #f5a623;
-  border-color: #f5a623;
+  color: #1a1205;
+  background: linear-gradient(180deg, var(--accent-bright), var(--accent-deep));
+  box-shadow: 0 6px 18px rgba(255, 178, 36, 0.35);
 }
 
-/* ---- Daily / Free Play toggle ---- */
+/* ---- Daily / Free Play / Ranked ---- */
 .modes {
   display: flex;
-  gap: 6px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 16px;
 }
 
 .mode-btn {
-  padding: 6px 14px;
+  padding: 7px 16px;
+  font-family: var(--body);
   font-size: 0.82rem;
-  font-weight: 600;
-  color: #9aa4b2;
-  background: transparent;
-  border: 2px solid #2a3340;
-  border-radius: 20px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-pill);
   cursor: pointer;
+  transition: color 0.18s, border-color 0.18s, transform 0.12s;
 }
+
+.mode-btn:hover { color: var(--text); transform: translateY(-1px); }
 
 .mode-btn.active {
-  color: #ffffff;
-  border-color: #4a8f3c;
-  background: #356b2b;
+  color: var(--text);
+  border-color: var(--accent);
+  background: linear-gradient(180deg, rgba(255, 178, 36, 0.18), rgba(255, 178, 36, 0.06));
+  box-shadow: inset 0 0 0 1px rgba(255, 178, 36, 0.25);
 }
 
-/* Rank line shown in Ranked mode */
+/* ---- Rank line ---- */
 .rank {
-  margin: 16px 0 -8px;
-  font-weight: 700;
-  color: #f5a623;
-  letter-spacing: 0.3px;
+  margin: 18px 0 0;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.4px;
 }
 
-/* "Find Online Match" button */
-.online-btn {
-  margin-top: 16px;
-  padding: 10px 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #ffffff;
-  background: #2f6fed;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+/* ---- Status "scoreboard" ---- */
+.status {
+  margin: 20px 0 0;
+  max-width: 560px;
+  padding: 11px 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-pill);
+  box-shadow: var(--shadow-sm);
 }
 
-.online-btn:hover {
-  background: #4480ff;
-}
-
-/* The box that holds the search input + dropdown */
+/* ---- Search box + dropdown ---- */
 .search-box {
-  position: relative;     /* so the dropdown can sit right under the input */
-  width: 340px;
+  position: relative;
+  width: 360px;
+  max-width: 92vw;
+  margin-top: 22px;
 }
 
 #player-input {
   width: 100%;
-  box-sizing: border-box;
-  padding: 14px 16px;
+  padding: 15px 18px;
+  font-family: var(--body);
   font-size: 1rem;
-  border: 2px solid #2a3340;
-  border-radius: 10px;
-  background: #1a2129;
-  color: #ffffff;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 2px solid var(--line);
+  border-radius: var(--r);
   outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
 }
+
+#player-input::placeholder { color: #61708a; }
 
 #player-input:focus {
-  border-color: #f5a623;   /* orange highlight, like our "close" clue color */
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(255, 178, 36, 0.16);
 }
 
-/* The dropdown list of matching players */
 #dropdown {
   list-style: none;
-  margin: 6px 0 0;
-  padding: 0;
+  margin: 8px 0 0;
+  padding: 6px;
   position: absolute;
   width: 100%;
-  background: #1a2129;
-  border: 2px solid #2a3340;
-  border-radius: 10px;
-  overflow: hidden;
-  max-height: 320px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  max-height: 326px;
   overflow-y: auto;
   z-index: 10;
 }
 
-/* Each row in the dropdown */
 #dropdown li {
-  padding: 12px 16px;
+  padding: 11px 14px;
+  border-radius: var(--r-sm);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: 500;
+  transition: background 0.12s;
 }
 
 #dropdown li:hover,
-#dropdown li.active {
-  background: #2a3340;
-}
+#dropdown li.active { background: var(--panel-2); }
 
-/* The grey team label on the right of each row */
 .team-label {
-  color: #9aa4b2;
-  font-size: 0.85rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
-/* Hide the dropdown when it has no items */
-#dropdown:empty {
-  display: none;
-}
+#dropdown:empty { display: none; }
 
 /* ---- The guessing board ---- */
-
 .board-wrap {
-  margin-top: 28px;
-  max-width: 95vw;
-  overflow-x: auto;        /* lets you scroll sideways on a narrow phone */
+  margin-top: 30px;
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 6px;
 }
 
-/* Header row and each guess row share the SAME columns so they line up. */
 .board-grid {
   display: grid;
-  grid-template-columns: 150px repeat(7, 70px);
-  gap: 6px;
+  grid-template-columns: 150px repeat(7, 70px); /* overridden per-sport by game.js */
+  gap: 7px;
 }
 
-.board-header {
-  margin-bottom: 6px;
-}
+.board-header { margin-bottom: 7px; }
 
-/* One box in the grid. */
+/* perspective so the tiles can flip in */
+#rows { perspective: 900px; }
+
 .cell {
-  height: 48px;
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 0.82rem;
-  border-radius: 8px;
-  padding: 0 4px;
-  box-sizing: border-box;
+  font-size: 0.84rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  border-radius: var(--r-sm);
+  padding: 0 5px;
 }
 
-/* The wider left-hand box holding the player's name. */
 .cell.name {
   justify-content: flex-start;
-  font-weight: 600;
-  background: #1a2129;
+  font-weight: 700;
+  background: var(--panel);
+  border: 1px solid var(--line-soft);
+  padding: 0 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 54px;
 }
 
-/* Column-title boxes. */
 .cell.head {
   background: transparent;
-  color: #9aa4b2;
-  font-size: 0.75rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   height: auto;
 }
 
-/* The three clue colors. */
-.clue.green  { background: #4a8f3c; color: #ffffff; }
-.clue.orange { background: #c98a2b; color: #ffffff; }
-.clue.gray   { background: #2a3340; color: #c7ced8; }
-
-/* New Game button. */
-.new-game {
-  margin-top: 26px;
-  padding: 12px 22px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #0f1419;
-  background: #f5a623;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+/* Clue tiles flip + rise in (delay set per-cell in game.js) */
+#rows .cell {
+  animation: tileIn 0.42s both;
+  transform-origin: center top;
 }
 
-.new-game:hover {
-  background: #ffb733;
+@keyframes tileIn {
+  from { opacity: 0; transform: rotateX(-80deg) translateY(-6px); }
+  60% { opacity: 1; }
+  to { opacity: 1; transform: none; }
+}
+
+.clue {
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), var(--shadow-sm);
+}
+
+.clue.green { background: linear-gradient(160deg, var(--green), var(--green-d)); }
+.clue.orange { background: linear-gradient(160deg, var(--orange), var(--orange-d)); }
+.clue.gray {
+  background: var(--tile-gray);
+  color: var(--tile-gray-tx);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ---- Buttons ---- */
+.new-game,
+.online-btn {
+  font-family: var(--body);
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  border: none;
+  border-radius: var(--r);
+  cursor: pointer;
+  transition: transform 0.12s, filter 0.18s, box-shadow 0.18s;
+}
+
+.new-game {
+  margin-top: 30px;
+  padding: 13px 28px;
+  font-size: 0.95rem;
+  color: #1a1205;
+  background: linear-gradient(180deg, var(--accent-bright), var(--accent-deep));
+  box-shadow: 0 10px 26px rgba(255, 178, 36, 0.32);
+}
+
+.online-btn {
+  margin-top: 16px;
+  padding: 11px 22px;
+  font-size: 0.9rem;
+  color: #fff;
+  background: linear-gradient(180deg, var(--blue), var(--blue-d));
+  box-shadow: 0 10px 26px rgba(63, 134, 255, 0.32);
+}
+
+.new-game:hover,
+.online-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+
+.new-game:active,
+.online-btn:active { transform: translateY(0); }
+
+@media (max-width: 480px) {
+  .tab { padding: 9px 14px; font-size: 0.86rem; }
+  .status { font-size: 0.85rem; }
 }

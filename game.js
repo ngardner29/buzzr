@@ -285,9 +285,10 @@ function renderRow(player, result) {
   nameCell.textContent = player.name;
   rows.appendChild(nameCell);
 
-  result.clues.forEach(function (clue) {
+  result.clues.forEach(function (clue, i) {
     const cell = document.createElement("div");
     cell.className = "cell clue " + clue.color;
+    cell.style.animationDelay = i * 0.06 + "s"; // flip in left-to-right
     cell.textContent = clue.value + (clue.arrow ? " " + clue.arrow : "");
     rows.appendChild(cell);
   });
