@@ -325,7 +325,7 @@ function updateStatus() {
       "🏆 Ranked " + sport.name + " — beat the opponent (solves in " + ghostTarget + ") · " +
       rank.rating + " " + tierOf(rank.rating) + " · " + guessesLeft + " guesses left";
   } else {
-    const tag = mode === "daily" ? "Daily" : "Free Play";
+    const tag = mode === "daily" ? "Daily" : "Unlimited";
     statusEl.textContent =
       tag + " · Guess the mystery " + sport.name + " player — " + guessesLeft + " guesses left";
   }
@@ -365,7 +365,7 @@ function endGame(solved) {
     return;
   }
 
-  const hint = mode === "daily" ? " (Switch to Free Play to keep playing.)" : "";
+  const hint = mode === "daily" ? " (Switch to Unlimited to keep playing.)" : "";
   statusEl.textContent = solved
     ? "🎉 You got it! It was " + secret.name + "." + hint
     : "❌ Out of guesses! It was " + secret.name + "." + hint;

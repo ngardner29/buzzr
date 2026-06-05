@@ -30,11 +30,16 @@
       <button class="tab" data-sport="mlb">⚾ MLB</button>
     </div>
 
-    <!-- Daily = same player for everyone today. Free Play = random. Ranked = race. -->
+    <!-- Daily is the main event. Unlimited = random replay. Ranked = race. -->
     <div class="modes">
-      <button class="mode-btn active" data-mode="daily">Daily</button>
-      <button class="mode-btn" data-mode="free">Free Play</button>
-      <button class="mode-btn" data-mode="ranked">🏆 Ranked</button>
+      <button class="mode-btn mode-primary active" data-mode="daily">
+        <span class="mode-title">Daily Challenge</span>
+        <span class="mode-sub">One mystery player — everyone gets the same</span>
+      </button>
+      <div class="modes-row">
+        <button class="mode-btn mode-mini" data-mode="free">Unlimited</button>
+        <button class="mode-btn mode-mini" data-mode="ranked">🏆 Ranked</button>
+      </div>
     </div>
 
     <!-- Your rank (only shows in Ranked mode) -->

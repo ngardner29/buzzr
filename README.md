@@ -10,8 +10,8 @@ Just open **`index.html`** in a web browser (double-click it).
 
 - **Tabs** at the top switch sport: 🏀 NBA · 🏈 NFL · ⚾ MLB.
 - **Modes:**
-  - **Daily** — the same mystery player for everyone, changes automatically each day.
-  - **Free Play** — a random player you can replay as much as you want.
+  - **Daily** — the main event: the same mystery player for everyone, changes automatically each day.
+  - **Unlimited** — a random player you can replay as much as you want.
   - **🏆 Ranked** — race an AI "ghost" opponent; win to climb Bronze → Diamond.
     Your rank is saved in your browser.
 - Type a name, press **Enter** to guess the top match.
