@@ -716,3 +716,14 @@ h1 {
   transition: color 0.18s, transform 0.12s;
 }
 .ranked-open:hover { color: var(--accent); transform: translateY(-1px); }
+
+.view-ranks {
+  margin-top: 14px;
+  color: var(--muted);
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.view-ranks:hover { color: var(--text); border-bottom-color: var(--accent); }

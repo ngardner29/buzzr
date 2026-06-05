@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Guesser — Ranks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080b11; --bg-2: #0d1320; --panel: #141c2b; --line: #28344a;
+      --text: #eef2f9; --muted: #8896ad; --accent: #ffc34d; --accent-deep: #e08c00;
+      --display: "Anton", sans-serif; --body: "Archivo", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; font-family: var(--body); color: var(--text);
+      background: radial-gradient(1100px 520px at 50% -160px, rgba(255,178,36,.16), transparent 60%),
+                  linear-gradient(180deg, var(--bg-2), var(--bg) 60%);
+      background-attachment: fixed; padding: 48px 20px 80px; text-align: center;
+    }
+    h1 {
+      font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 7vw, 3.6rem);
+      letter-spacing: 3px; text-transform: uppercase; margin: 0;
+      background: linear-gradient(180deg, #fff, var(--accent) 78%, var(--accent-deep));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .sub { color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
+      font-size: .74rem; font-weight: 700; margin: 10px 0 40px; }
+    .grid {
+      display: grid; gap: 18px; max-width: 920px; margin: 0 auto;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+      padding: 20px 14px 18px; position: relative; transition: transform .15s, border-color .15s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .card img { width: 118px; height: 118px; object-fit: contain;
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,.55)); }
+    .tier { font-family: var(--display); font-size: 1.35rem; letter-spacing: 1px;
+      text-transform: uppercase; margin-top: 12px; }
+    .num { position: absolute; top: 10px; left: 12px; color: var(--muted);
+      font-weight: 800; font-size: .85rem; }
+    .note { font-size: .72rem; color: var(--muted); font-weight: 700;
+      letter-spacing: .5px; margin-top: 4px; min-height: 1em; }
+    .start .note { color: var(--accent); }
+    .top { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 18px 40px rgba(255,178,36,.18); }
+    .back { display: inline-block; margin-top: 44px; color: var(--accent);
+      font-weight: 700; text-decoration: none; }
+    @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+  <h1>The Rank Ladder</h1>
+  <p class="sub">Win ranked matches to climb · Everyone starts at Silver</p>
+
+  <div class="grid">
+    <div class="card"><span class="num">1</span><img src="assets/ranks/copper.png" alt="Copper" /><div class="tier">Copper</div><div class="note"></div></div>
+    <div class="card"><span class="num">2</span><img src="assets/ranks/bronze.png" alt="Bronze" /><div class="tier">Bronze</div><div class="note"></div></div>
+    <div class="card start"><span class="num">3</span><img src="assets/ranks/silver.png" alt="Silver" /><div class="tier">Silver</div><div class="note">★ Starting rank</div></div>
+    <div class="card"><span class="num">4</span><img src="assets/ranks/gold.png" alt="Gold" /><div class="tier">Gold</div><div class="note"></div></div>
+    <div class="card"><span class="num">5</span><img src="assets/ranks/platinum.png" alt="Platinum" /><div class="tier">Platinum</div><div class="note"></div></div>
+    <div class="card"><span class="num">6</span><img src="assets/ranks/emerald.png" alt="Emerald" /><div class="tier">Emerald</div><div class="note"></div></div>
+    <div class="card"><span class="num">7</span><img src="assets/ranks/diamond.png" alt="Diamond" /><div class="tier">Diamond</div><div class="note"></div></div>
+    <div class="card top"><span class="num">8</span><img src="assets/ranks/champion.png" alt="Champion" /><div class="tier">Champion</div><div class="note">Top rank</div></div>
+  </div>
+
+  <a class="back" href="index.html">← Back to the game</a>
+</body>
+</html>
