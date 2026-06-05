@@ -16,7 +16,7 @@
 </head>
 <body>
 
-  <!-- First-visit prompt: pick a username -->
+  <!-- First-visit prompt: pick a username (used when Firebase login is OFF) -->
   <div id="account-modal" class="modal-overlay" style="display:none">
     <div class="modal-card">
       <div class="modal-emblem">🏆</div>
@@ -25,6 +25,26 @@
       <input id="username-input" type="text" maxlength="16" placeholder="Username" autocomplete="off" />
       <p id="username-error" class="modal-error"></p>
       <button id="username-save" class="play-btn small">Let’s play →</button>
+    </div>
+  </div>
+
+  <!-- Login screen (used when Firebase login is ON) -->
+  <div id="login-modal" class="modal-overlay" style="display:none">
+    <div class="modal-card">
+      <div class="modal-emblem">🏆</div>
+      <h2>Sports Guesser</h2>
+      <p>Log in to save your rank across devices.</p>
+      <button id="google-login" class="google-btn">
+        <span class="g">G</span> Continue with Google
+      </button>
+      <div class="divider"><span>or</span></div>
+      <input id="login-email" type="email" placeholder="Email" autocomplete="email" />
+      <input id="login-password" type="password" placeholder="Password" autocomplete="current-password" />
+      <p id="login-error" class="modal-error"></p>
+      <div class="login-actions">
+        <button id="login-btn" class="play-btn small">Log in</button>
+        <button id="signup-btn" class="ghost-btn">Sign up</button>
+      </div>
     </div>
   </div>
 
@@ -95,6 +115,7 @@
             <div id="profile-tier" class="profile-tier"></div>
             <div id="profile-record" class="profile-record"></div>
             <button id="change-username" class="link-btn">Change username</button>
+            <button id="logout-btn" class="link-btn" style="display:none">Log out</button>
           </div>
         </div>
       </div>
@@ -123,12 +144,19 @@
   <script src="data/nba.js"></script>
   <script src="data/nfl.js"></script>
   <script src="data/mlb.js"></script>
-  <!-- 2) Game engine. -->
+  <!-- 2) Firebase SDK (for login + cloud-saved rank). -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <!-- 3) Game engine. -->
   <script src="game.js"></script>
-  <!-- 3) Online-ranked client. -->
+  <!-- 4) Online-ranked client. -->
   <script src="online.js"></script>
-  <!-- 4) Profile, views, and the Ranked screen. -->
+  <!-- 5) Profile, views, and the Ranked screen. -->
   <script src="profile.js"></script>
+  <!-- 6) Firebase login + cloud rank (only activates once configured). -->
+  <script src="auth.js"></script>
 
 </body>
 </html>

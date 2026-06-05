@@ -218,6 +218,8 @@ function saveRank(r) {
   try {
     localStorage.setItem("sg_rank2", JSON.stringify(r));
   } catch (e) {}
+  // If signed in to Firebase, also save the rank to the cloud (auth.js).
+  if (typeof onRankSaved === "function") onRankSaved();
 }
 
 // Turn a rating number into a tier name. Everyone starts at 1000 = Silver.

@@ -131,6 +131,7 @@ function saveUsername() {
   accountModal.style.display = "none";
   profileChip.style.display = "";
   refreshProfileUI();
+  if (typeof cloudSync === "function") cloudSync(); // save new name to the cloud if logged in
 }
 
 /* ---------- Wiring ---------- */
@@ -159,7 +160,10 @@ playRanked.addEventListener("click", () => startRanked(false));
 playOnline.addEventListener("click", () => startRanked(true));
 
 /* ---------- Start ---------- */
-if (!getUsername()) {
+const usingFirebase = typeof firebaseConfigured === "function" && firebaseConfigured();
+if (usingFirebase) {
+  // auth.js drives the login screen and shows the profile chip after sign-in.
+} else if (!getUsername()) {
   openAccountModal();
 } else {
   profileChip.style.display = "";

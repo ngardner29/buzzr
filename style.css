@@ -727,3 +727,72 @@ h1 {
   border-bottom: 1px solid transparent;
 }
 .view-ranks:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+/* ---- Login screen (Firebase) ---- */
+#login-email, #login-password {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px 15px;
+  font-family: var(--body);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 2px solid var(--line);
+  border-radius: var(--r-sm);
+  outline: none;
+}
+#login-email:focus, #login-password:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(255, 178, 36, 0.16);
+}
+
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1f2430;
+  background: #ffffff;
+  border: none;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.12s;
+}
+.google-btn:hover { filter: brightness(0.95); transform: translateY(-1px); }
+.google-btn .g {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: conic-gradient(from -45deg, #ea4335 0 25%, #fbbc05 0 50%, #34a853 0 75%, #4285f4 0);
+  color: #fff; font-weight: 800; font-size: 0.8rem;
+}
+
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 16px 0 4px; color: var(--muted); font-size: 0.78rem; font-weight: 700;
+}
+.divider::before, .divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--line);
+}
+
+.login-actions { display: flex; gap: 10px; margin-top: 16px; }
+.login-actions .play-btn.small { flex: 1; margin: 0; }
+
+.ghost-btn {
+  flex: 1;
+  padding: 12px 20px;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: transparent;
+  border: 2px solid var(--line);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.12s;
+}
+.ghost-btn:hover { border-color: var(--accent); transform: translateY(-1px); }
