@@ -230,10 +230,12 @@ def fetch_stats(path):
 
 
 # Keep a player only if they meet the "known / contributor" bar for their sport.
+# (player, stats) -> bool. NFL is limited to skill positions (QB/RB/WR/TE).
+NFL_SKILL = ("QB", "RB", "WR", "TE")
 KNOWN = {
-    "nba": lambda s: (s.get("avgMinutes") or 0) >= 12 and (s.get("gamesPlayed") or 0) >= 10,
-    "nfl": lambda s: (s.get("gamesPlayed") or 0) >= 8,
-    "mlb": lambda s: (s.get("gamesPlayed") or 0) >= 25,
+    "nba": lambda p, s: (s.get("avgMinutes") or 0) >= 12 and (s.get("gamesPlayed") or 0) >= 10,
+    "nfl": lambda p, s: p.get("position") in NFL_SKILL and (s.get("gamesPlayed") or 0) >= 8,
+    "mlb": lambda p, s: (s.get("gamesPlayed") or 0) >= 25,
 }
 
 
@@ -250,7 +252,7 @@ def main():
         stats = fetch_stats(SPORTS[sport]["path"])
         keep = KNOWN[sport]
         before = len(players)
-        players = [p for p in players if keep(stats.get(p["id"], {}))]
+        players = [p for p in players if keep(p, stats.get(p["id"], {}))]
         print(f"  known-player filter: {before} -> {len(players)}")
         write_js(sport, players)
     print("\nDone.")
