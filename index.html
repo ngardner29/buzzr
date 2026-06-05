@@ -16,6 +16,24 @@
 </head>
 <body>
 
+  <!-- First-visit prompt: pick a username -->
+  <div id="account-modal" class="modal-overlay" style="display:none">
+    <div class="modal-card">
+      <div class="modal-emblem">🏆</div>
+      <h2>Create your profile</h2>
+      <p>Pick a username to track your rank and play online.</p>
+      <input id="username-input" type="text" maxlength="16" placeholder="Username" autocomplete="off" />
+      <p id="username-error" class="modal-error"></p>
+      <button id="username-save" class="play-btn small">Let’s play →</button>
+    </div>
+  </div>
+
+  <!-- Always-visible identity chip -->
+  <button id="profile-chip" class="profile-chip" style="display:none">
+    <img id="chip-badge" class="chip-badge" alt="rank" />
+    <span id="chip-name"></span>
+  </button>
+
   <main class="app">
 
     <header class="masthead">
@@ -23,52 +41,80 @@
       <p class="tagline">Daily Player Showdown · NBA · NFL · MLB</p>
     </header>
 
-    <!-- Pick a sport. Each one plays exactly the same way. -->
-    <div class="tabs">
-      <button class="tab active" data-sport="nba">🏀 NBA</button>
-      <button class="tab" data-sport="nfl">🏈 NFL</button>
-      <button class="tab" data-sport="mlb">⚾ MLB</button>
-    </div>
+    <!-- ====== MAIN GAME VIEW ====== -->
+    <div id="view-game">
 
-    <!-- Daily is the main event. Unlimited = random replay. Ranked = race. -->
-    <div class="modes">
-      <button class="mode-btn mode-primary active" data-mode="daily">
-        <span class="mode-title">Daily Challenge</span>
-        <span class="mode-sub">One mystery player — everyone gets the same</span>
-      </button>
-      <div class="modes-row">
-        <button class="mode-btn mode-mini" data-mode="free">Unlimited</button>
-        <button class="mode-btn mode-mini" data-mode="ranked">🏆 Ranked</button>
+      <div class="tabs">
+        <button class="tab active" data-sport="nba">🏀 NBA</button>
+        <button class="tab" data-sport="nfl">🏈 NFL</button>
+        <button class="tab" data-sport="mlb">⚾ MLB</button>
       </div>
+
+      <div class="modes">
+        <button class="mode-btn mode-primary active" data-mode="daily">
+          <span class="mode-title">Daily Challenge</span>
+          <span class="mode-sub">One mystery player — everyone gets the same</span>
+        </button>
+        <div class="modes-row">
+          <button class="mode-btn mode-mini" data-mode="free">Unlimited</button>
+          <button id="open-ranked" class="mode-mini ranked-open">🏆 Ranked</button>
+        </div>
+      </div>
+
+      <p id="rank" class="rank" style="display:none"></p>
+      <button id="find-online" class="online-btn" style="display:none">🌐 Find Online Match</button>
+
+      <p id="status" class="status">Guess the mystery player</p>
+
+      <div class="search-box">
+        <input id="player-input" type="text" placeholder="Type a player and press Enter…" autocomplete="off" />
+        <ul id="dropdown"></ul>
+      </div>
+
+      <div class="board-wrap">
+        <div class="board-grid board-header" id="board-header"></div>
+        <div id="rows" class="board-grid"></div>
+      </div>
+
+      <button id="new-game" class="new-game">New Game</button>
     </div>
 
-    <!-- Your rank (only shows in Ranked mode) -->
-    <p id="rank" class="rank" style="display:none"></p>
+    <!-- ====== RANKED VIEW ====== -->
+    <section id="view-ranked" style="display:none">
+      <div class="ranked-topbar">
+        <button id="ranked-back" class="ranked-back">← Back</button>
 
-    <!-- Find a real opponent online (only shows in Ranked mode) -->
-    <button id="find-online" class="online-btn" style="display:none">🌐 Find Online Match</button>
+        <div class="ranked-profile">
+          <button id="profile-toggle" class="profile-toggle">
+            <img id="profile-badge-sm" class="profile-badge-sm" alt="rank" />
+            <span id="profile-name-sm"></span>
+            <span class="caret">▾</span>
+          </button>
+          <div id="profile-menu" class="profile-menu" style="display:none">
+            <img id="profile-badge-lg" class="profile-badge-lg" alt="rank" />
+            <div id="profile-tier" class="profile-tier"></div>
+            <div id="profile-record" class="profile-record"></div>
+            <button id="change-username" class="link-btn">Change username</button>
+          </div>
+        </div>
+      </div>
 
-    <!-- How many guesses are left, and the win/lose message -->
-    <p id="status" class="status">Guess the mystery player</p>
+      <div class="ranked-hero">
+        <h2 class="ranked-title">RANKED</h2>
+        <img id="ranked-badge" class="ranked-badge" alt="your rank" />
+        <div id="ranked-tier" class="ranked-tier">Silver</div>
+        <div class="ranked-sub">Race a real opponent. Win to climb the ladder.</div>
 
-    <!-- The search area: a text box with a dropdown that appears underneath -->
-    <div class="search-box">
-      <input
-        id="player-input"
-        type="text"
-        placeholder="Type a player and press Enter…"
-        autocomplete="off"
-      />
-      <ul id="dropdown"></ul>
-    </div>
+        <div class="ranked-sports">
+          <button class="rsport active" data-sport="nba">🏀 NBA</button>
+          <button class="rsport" data-sport="nfl">🏈 NFL</button>
+          <button class="rsport" data-sport="mlb">⚾ MLB</button>
+        </div>
 
-    <!-- The board. The header and each guess row are filled in by game.js. -->
-    <div class="board-wrap">
-      <div class="board-grid board-header" id="board-header"></div>
-      <div id="rows" class="board-grid"></div>
-    </div>
-
-    <button id="new-game" class="new-game">New Game</button>
+        <button id="play-ranked" class="play-btn">PLAY</button>
+        <button id="play-online" class="play-online">🌐 Play Online (beta)</button>
+      </div>
+    </section>
 
   </main>
 
@@ -76,10 +122,12 @@
   <script src="data/nba.js"></script>
   <script src="data/nfl.js"></script>
   <script src="data/mlb.js"></script>
-  <!-- 2) Load the game (uses that data). -->
+  <!-- 2) Game engine. -->
   <script src="game.js"></script>
-  <!-- 3) Load the online-ranked client (safe to load even with no server). -->
+  <!-- 3) Online-ranked client. -->
   <script src="online.js"></script>
+  <!-- 4) Profile, views, and the Ranked screen. -->
+  <script src="profile.js"></script>
 
 </body>
 </html>

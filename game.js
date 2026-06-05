@@ -219,13 +219,22 @@ function saveRank(r) {
   } catch (e) {}
 }
 
-// Turn a rating number into a tier name.
+// Turn a rating number into a tier name. Everyone starts at 1000 = Silver.
+// The rating number is hidden from players; only the tier name/badge shows.
 function tierOf(rating) {
-  if (rating < 900) return "Bronze";
+  if (rating < 800) return "Copper";
+  if (rating < 950) return "Bronze";
   if (rating < 1100) return "Silver";
-  if (rating < 1300) return "Gold";
-  if (rating < 1500) return "Platinum";
-  return "Diamond";
+  if (rating < 1250) return "Gold";
+  if (rating < 1400) return "Platinum";
+  if (rating < 1550) return "Emerald";
+  if (rating < 1700) return "Diamond";
+  return "Champion";
+}
+
+// Lowercase key for the badge image file, e.g. "silver" -> assets/ranks/silver.png
+function tierKey(rating) {
+  return tierOf(rating).toLowerCase();
 }
 
 // Decide how many guesses the ghost opponent needs (tougher as your rating climbs).
@@ -323,7 +332,7 @@ function updateStatus() {
   if (mode === "ranked") {
     statusEl.textContent =
       "🏆 Ranked " + sport.name + " — beat the opponent (solves in " + ghostTarget + ") · " +
-      rank.rating + " " + tierOf(rank.rating) + " · " + guessesLeft + " guesses left";
+      tierOf(rank.rating) + " · " + guessesLeft + " guesses left";
   } else {
     const tag = mode === "daily" ? "Daily" : "Unlimited";
     statusEl.textContent =
@@ -336,9 +345,7 @@ function updateRankDisplay() {
   if (!rankEl) return;
   if (mode === "ranked") {
     rankEl.style.display = "";
-    rankEl.textContent =
-      "Rank: " + rank.rating + " (" + tierOf(rank.rating) + ") · " +
-      rank.wins + "W " + rank.losses + "L";
+    rankEl.textContent = tierOf(rank.rating) + " · " + rank.wins + "W " + rank.losses + "L";
   } else {
     rankEl.style.display = "none";
   }
@@ -360,8 +367,9 @@ function endGame(solved) {
     } else {
       msg = "❌ Out of guesses! It was " + secret.name + ". ";
     }
-    statusEl.textContent = msg + sign + delta + " RP → " + rank.rating + " (" + tierOf(rank.rating) + ")";
+    statusEl.textContent = msg + sign + delta + " RP · " + tierOf(rank.rating);
     updateRankDisplay();
+    if (typeof onRankChanged === "function") onRankChanged(); // refresh ranked screen badge
     return;
   }
 
