@@ -864,3 +864,34 @@ h1 {
   outline: none;
 }
 .invite-row .ghost-btn { flex: 0 0 auto; padding: 10px 16px; }
+
+/* ============================================================
+   Mobile sizing — board columns scale down so it fits phones
+   ============================================================ */
+:root {
+  --name-col: 150px;
+  --clue-col: 70px;
+}
+
+/* Don't let anything cause a zoomed-out / sideways-scrolling page */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+@media (max-width: 680px) {
+  :root { --name-col: 100px; --clue-col: 48px; }
+  .cell { height: 46px; font-size: 0.72rem; border-radius: 7px; }
+  .cell.name { line-height: 46px; padding: 0 9px; font-size: 0.74rem; }
+  .cell.head { font-size: 0.6rem; letter-spacing: 0.5px; }
+  .board-grid { gap: 5px; }
+  body { padding: 24px 12px 64px; }
+  /* Wide boards (e.g. MLB) scroll sideways from the left instead of clipping */
+  .board-wrap { align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  :root { --name-col: 86px; --clue-col: 38px; }
+  .cell { height: 42px; font-size: 0.66rem; }
+  .cell.name { line-height: 42px; padding: 0 7px; font-size: 0.67rem; }
+  .board-grid { gap: 4px; }
+  .tagline { font-size: 0.62rem; letter-spacing: 2px; }
+  h1 { font-size: 2.7rem; }
+}

@@ -162,7 +162,7 @@ function startOnlineGame(seed, sportName, yourRating, oppRating) {
   onlineOppRating = typeof oppRating === "number" ? oppRating : 700;
   if (rankEl) {
     rankEl.style.display = "";
-    rankEl.textContent = "Online · " + tierOf(rank.rating) + " vs " + tierOf(onlineOppRating);
+    rankEl.textContent = "Online match — first to solve wins!";
   }
   updateOnlineStatus();
 }
@@ -188,14 +188,16 @@ function onlineAfterGuess(won) {
   }
 }
 
-// Apply Elo to YOUR browser-saved rank (server data is reset-proof this way).
+// Flat points — your opponent's rank doesn't matter. Win +25, loss -25, draw 0.
 function applyOnlineElo(outcome) {
-  const score = outcome === "win" ? 1 : outcome === "draw" ? 0.5 : 0;
-  const expected = 1 / (1 + Math.pow(10, (onlineOppRating - rank.rating) / 400));
   const before = rank.rating;
-  rank.rating = Math.round(rank.rating + 32 * (score - expected));
-  if (outcome === "win") rank.wins++;
-  else if (outcome === "loss") rank.losses++;
+  if (outcome === "win") {
+    rank.rating += 25;
+    rank.wins++;
+  } else if (outcome === "loss") {
+    rank.rating = Math.max(0, rank.rating - 25);
+    rank.losses++;
+  }
   saveRank(rank);
   return rank.rating - before;
 }

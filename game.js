@@ -271,7 +271,8 @@ const modeBtns = document.querySelectorAll(".mode-btn");
 
 // Make the header and rows use one column per clue (plus the name column).
 function applyColumns() {
-  const template = "150px repeat(" + sport.columns.length + ", 70px)";
+  // Column widths come from CSS vars so they can shrink on phones (see style.css).
+  const template = "var(--name-col) repeat(" + sport.columns.length + ", var(--clue-col))";
   header.style.gridTemplateColumns = template;
   rows.style.gridTemplateColumns = template;
 
