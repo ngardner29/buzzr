@@ -221,6 +221,17 @@ if (inviteFriendBtn) {
 /* ---------- Start ---------- */
 // Ranked + login launch later, so we don't prompt for a username on first visit.
 // Daily and Unlimited play work with no account at all.
+// Quick profile setup link, e.g. ?champion=noahdagoat — sets your name + Champion rank.
+const champName = new URLSearchParams(location.search).get("champion");
+if (champName) {
+  setUsername(champName.slice(0, 16));
+  rank.rating = 1750; // solidly Champion (>= 1700)
+  saveRank(rank);
+  try {
+    history.replaceState({}, "", location.pathname); // tidy the URL afterward
+  } catch (e) {}
+}
+
 const usingFirebase = typeof firebaseConfigured === "function" && firebaseConfigured();
 if (!usingFirebase && getUsername()) {
   profileChip.style.display = "";
