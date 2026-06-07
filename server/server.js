@@ -103,6 +103,7 @@ function startMatch(a, b, sport) {
   const rb = b.rating != null ? b.rating : 700;
   send(a, { type: "matchFound", seed, sport, yourRating: ra, opponentRating: rb });
   send(b, { type: "matchFound", seed, sport, yourRating: rb, opponentRating: ra });
+  if (typeof broadcastOnline === "function") broadcastOnline(); // searching count changed
 }
 
 // Try to pair the two newest players waiting in a private room.
@@ -171,16 +172,41 @@ function opponentOf(room, ws) {
 
 /* ---------- WebSocket wiring ---------- */
 
+function countSearching() {
+  let n = 0;
+  for (const s of Object.values(queues)) n += s.length;
+  for (const code in privateRooms) n += privateRooms[code].length;
+  return n;
+}
+
 const server = http.createServer((req, res) => {
+  // Small JSON endpoint the site can poll for the live player count.
+  if (req.url && req.url.split("?")[0] === "/stats") {
+    res.writeHead(200, {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    });
+    res.end(JSON.stringify({ online: wss.clients.size, searching: countSearching() }));
+    return;
+  }
   res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Sports Guesser server is running.");
+  res.end("Buzzr server is running.");
 });
 
 const wss = new WebSocketServer({ server });
 
+// Tell every connected client how many people are online / searching.
+function broadcastOnline() {
+  const payload = JSON.stringify({ type: "online", count: wss.clients.size, searching: countSearching() });
+  wss.clients.forEach((c) => {
+    if (c.readyState === WebSocket.OPEN) c.send(payload);
+  });
+}
+
 wss.on("connection", function (ws) {
   ws.playerId = null;
   ws.match = null;
+  broadcastOnline();
 
   ws.on("message", function (raw) {
     let msg;
@@ -211,11 +237,13 @@ wss.on("connection", function (ws) {
         send(ws, { type: "searching" });
         tryMatch(sport);
       }
+      broadcastOnline();
       return;
     }
 
     if (msg.type === "cancel") {
       dequeue(ws);
+      broadcastOnline();
       return;
     }
 
@@ -242,6 +270,7 @@ wss.on("connection", function (ws) {
     if (ws.match && !ws.match.done) {
       finishMatch(ws.match, opponentOf(ws.match, ws)); // opponent wins by forfeit
     }
+    broadcastOnline();
   });
 });
 

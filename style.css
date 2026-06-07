@@ -895,3 +895,12 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .tagline { font-size: 0.62rem; letter-spacing: 2px; }
   h1 { font-size: 2.7rem; }
 }
+
+/* Players-online counter on the Ranked screen */
+.online-count {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--muted);
+}

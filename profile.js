@@ -102,6 +102,7 @@ function openRanked() {
   if (getUsername()) profileChip.style.display = "";
   refreshProfileUI();
   showView("ranked");
+  if (typeof fetchOnlineCount === "function") fetchOnlineCount();
 }
 
 function setSport(key) {

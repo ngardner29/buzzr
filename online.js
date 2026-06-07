@@ -9,6 +9,8 @@
 
 // Your deployed matchmaking server (Render). wss = secure WebSocket.
 const SERVER_URL = "wss://buzzr-tbeq.onrender.com";
+// Same server over plain HTTPS, for the /stats player-count poll.
+const STATS_URL = SERVER_URL.replace(/^wss:/, "https:").replace(/^ws:/, "http:") + "/stats";
 
 let socket = null;
 let onlineOppGuesses = 0;
@@ -22,7 +24,7 @@ const mmCancel = document.getElementById("mm-cancel");
 const inviteBox = document.getElementById("invite-box");
 const inviteLink = document.getElementById("invite-link");
 const inviteCopy = document.getElementById("invite-copy");
-const inviteFriendBtn = document.getElementById("invite-friend");
+// (the Invite-a-friend button is wired in profile.js, which owns username gating)
 
 /* ---------- A stable anonymous id for this browser ---------- */
 function getPlayerId() {
@@ -99,7 +101,31 @@ function onNetError() {
   mmText.textContent = "⚠️ Couldn't reach the server. It may be asleep — wait a few seconds and try again.";
 }
 
+// Show "N players online" on the Ranked screen.
+function setOnlineCount(online) {
+  const el = document.getElementById("online-count");
+  if (!el) return;
+  const n = online == null ? "—" : online;
+  el.textContent = "🟢 " + n + (n === 1 ? " player online" : " players online");
+}
+
+// Poll the server's /stats once (used when the Ranked screen opens).
+function fetchOnlineCount() {
+  const el = document.getElementById("online-count");
+  if (el) el.textContent = "🟢 checking who’s online…";
+  fetch(STATS_URL)
+    .then((r) => r.json())
+    .then((d) => setOnlineCount(d.online))
+    .catch(() => {
+      if (el) el.textContent = "🟢 server waking up…";
+    });
+}
+
 function handleServerMessage(msg) {
+  if (msg.type === "online") {
+    setOnlineCount(msg.count);
+    return;
+  }
   if (msg.type === "searching") {
     if (currentRoom) mmText.textContent = "Waiting for your friend to join…";
     else mmText.textContent = "Searching for an opponent in " + SPORTS[sportKey].name + "…";
