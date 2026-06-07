@@ -65,6 +65,19 @@
     </div>
   </div>
 
+  <!-- Ranked result popup (shown after an online match) -->
+  <div id="result-modal" class="modal-overlay" style="display:none">
+    <div class="result-card">
+      <div id="result-title" class="result-title">You Won!</div>
+      <img id="result-badge" class="result-badge-img" alt="your rank" />
+      <div id="result-tier" class="result-tier-name">Copper</div>
+      <div class="result-bar"><div id="result-bar-fill" class="result-bar-fill"></div></div>
+      <div id="result-progress-text" class="result-progress-text"></div>
+      <div id="result-delta" class="result-delta"></div>
+      <button id="result-close" class="play-btn small">Continue</button>
+    </div>
+  </div>
+
   <!-- Always-visible identity chip -->
   <button id="profile-chip" class="profile-chip" style="display:none">
     <img id="chip-badge" class="chip-badge" alt="rank" />

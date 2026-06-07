@@ -244,6 +244,7 @@ function showOnlineResult(msg) {
     label + " It was " + secret.name + ". " + sign + delta + " RP · " + tierOf(rank.rating);
   if (rankEl) rankEl.textContent = "Online · " + tierOf(rank.rating);
   if (typeof onRankChanged === "function") onRankChanged();
+  if (typeof showResultModal === "function") showResultModal(msg.outcome, delta);
 }
 
 /* ---------- Wiring ---------- */

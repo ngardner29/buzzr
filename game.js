@@ -238,6 +238,30 @@ function tierKey(rating) {
   return tierOf(rating).toLowerCase();
 }
 
+// The bottom rating of each tier (matches tierOf). Used for the progress bar.
+const TIER_FLOORS = [
+  ["Copper", 700], ["Bronze", 800], ["Silver", 950], ["Gold", 1100],
+  ["Platinum", 1250], ["Emerald", 1400], ["Diamond", 1550], ["Champion", 1700],
+];
+
+// How far through the current tier you are, and how many points to the next one.
+function rankProgress(rating) {
+  let i = 0;
+  for (let k = 0; k < TIER_FLOORS.length; k++) {
+    if (rating >= TIER_FLOORS[k][1]) i = k;
+  }
+  const cur = TIER_FLOORS[i];
+  if (i === TIER_FLOORS.length - 1) {
+    return { tier: cur[0], next: null, pct: 1, toNext: 0 }; // Champion = max
+  }
+  const next = TIER_FLOORS[i + 1];
+  const lo = cur[1];
+  const hi = next[1];
+  let pct = (rating - lo) / (hi - lo);
+  pct = Math.max(0, Math.min(1, pct));
+  return { tier: cur[0], next: next[0], pct: pct, toNext: Math.max(0, hi - rating) };
+}
+
 // Decide how many guesses the ghost opponent needs (tougher as your rating climbs).
 function ghostGuesses(rating) {
   return clamp(Math.round(5 - (rating - 1000) / 250) + (Math.floor(Math.random() * 3) - 1), 2, 6);

@@ -91,6 +91,49 @@ function onRankChanged() {
   refreshProfileUI();
 }
 
+/* ---------- Ranked result popup ---------- */
+const resultModal = document.getElementById("result-modal");
+const resultTitle = document.getElementById("result-title");
+const resultBadge = document.getElementById("result-badge");
+const resultTierName = document.getElementById("result-tier");
+const resultBarFill = document.getElementById("result-bar-fill");
+const resultProgressText = document.getElementById("result-progress-text");
+const resultDelta = document.getElementById("result-delta");
+const resultClose = document.getElementById("result-close");
+
+// outcome: "win" | "loss" | "draw". delta: points gained/lost this match.
+function showResultModal(outcome, delta) {
+  const prog = rankProgress(rank.rating);
+
+  resultTitle.textContent =
+    outcome === "win" ? "You Won!" : outcome === "draw" ? "Draw" : "You Lost";
+  resultModal.classList.toggle("is-loss", outcome === "loss");
+
+  resultBadge.src = badgePath(rank.rating);
+  resultTierName.textContent = prog.tier;
+
+  resultDelta.textContent = (delta >= 0 ? "+" : "") + delta + " RP";
+
+  if (prog.next) {
+    resultProgressText.textContent = prog.toNext + " pts to " + prog.next;
+  } else {
+    resultProgressText.textContent = "Max rank reached!";
+  }
+
+  // Animate the bar from 0 to its value.
+  resultBarFill.style.width = "0%";
+  resultModal.style.display = "flex";
+  setTimeout(function () {
+    resultBarFill.style.width = Math.round(prog.pct * 100) + "%";
+  }, 80);
+}
+
+if (resultClose) {
+  resultClose.addEventListener("click", function () {
+    resultModal.style.display = "none";
+  });
+}
+
 /* ---------- Views ---------- */
 function showView(name) {
   viewGame.style.display = name === "game" ? "" : "none";
