@@ -3666,7 +3666,7 @@ const NFL_PLAYERS = [
     "posGroup": "OFF",
     "height": 75,
     "heightDisplay": "6' 3\"",
-    "age": 29,
+    "age": 30,
     "jersey": 80,
     "weight": 253,
     "bats": "",
