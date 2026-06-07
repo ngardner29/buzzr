@@ -48,6 +48,23 @@
     </div>
   </div>
 
+  <!-- Matchmaking / waiting screen -->
+  <div id="matchmaking-modal" class="modal-overlay" style="display:none">
+    <div class="modal-card">
+      <div class="mm-spinner"></div>
+      <h2>Finding a match</h2>
+      <p id="mm-text" class="mm-text">Searching for an opponent…</p>
+      <div id="invite-box" class="invite-box" style="display:none">
+        <p class="invite-label">Send this link to a friend so they can join:</p>
+        <div class="invite-row">
+          <input id="invite-link" class="invite-link" readonly />
+          <button id="invite-copy" class="ghost-btn">Copy</button>
+        </div>
+      </div>
+      <button id="mm-cancel" class="ghost-btn mm-cancel">Cancel</button>
+    </div>
+  </div>
+
   <!-- Always-visible identity chip -->
   <button id="profile-chip" class="profile-chip" style="display:none">
     <img id="chip-badge" class="chip-badge" alt="rank" />
@@ -81,7 +98,6 @@
       </div>
 
       <p id="rank" class="rank" style="display:none"></p>
-      <button id="find-online" class="online-btn" style="display:none">🌐 Find Online Match</button>
 
       <p id="status" class="status">Guess the mystery player</p>
 
@@ -132,6 +148,7 @@
             <button class="rsport" data-sport="mlb">⚾ MLB</button>
           </div>
           <button id="play-ranked" class="play-btn">PLAY</button>
+          <button id="invite-friend" class="play-online">🔗 Invite a friend</button>
           <a class="view-ranks" href="ranks.html">View all ranks →</a>
         </div>
       </div>

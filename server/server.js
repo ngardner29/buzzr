@@ -59,11 +59,20 @@ function send(ws, obj) {
   }
 }
 
-// Remove a socket from every queue (used on disconnect / cancel).
+// Private "invite a friend" rooms: code -> array of waiting sockets.
+const privateRooms = {};
+
+// Remove a socket from every queue + any private room (used on disconnect / cancel).
 function dequeue(ws) {
   for (const sport of Object.keys(queues)) {
     const i = queues[sport].indexOf(ws);
     if (i !== -1) queues[sport].splice(i, 1);
+  }
+  if (ws.room && privateRooms[ws.room]) {
+    const r = privateRooms[ws.room];
+    const j = r.indexOf(ws);
+    if (j !== -1) r.splice(j, 1);
+    if (r.length === 0) delete privateRooms[ws.room];
   }
 }
 
@@ -89,8 +98,30 @@ function startMatch(a, b, sport) {
   const room = { sport, seed, players: [a, b], done: false, status: new Map() };
   a.match = room;
   b.match = room;
-  send(a, { type: "matchFound", seed, sport, yourRating: record(a.playerId).rating, opponentRating: record(b.playerId).rating });
-  send(b, { type: "matchFound", seed, sport, yourRating: record(b.playerId).rating, opponentRating: record(a.playerId).rating });
+  // Relay each player's own local rating (sent when queueing) to the other.
+  const ra = a.rating != null ? a.rating : 700;
+  const rb = b.rating != null ? b.rating : 700;
+  send(a, { type: "matchFound", seed, sport, yourRating: ra, opponentRating: rb });
+  send(b, { type: "matchFound", seed, sport, yourRating: rb, opponentRating: ra });
+}
+
+// Try to pair the two newest players waiting in a private room.
+function tryMatchRoom(code) {
+  const r = privateRooms[code] || [];
+  while (r.length >= 2) {
+    const a = r.shift();
+    const b = r.shift();
+    if (a.readyState !== WebSocket.OPEN) {
+      if (b.readyState === WebSocket.OPEN) r.unshift(b);
+      continue;
+    }
+    if (b.readyState !== WebSocket.OPEN) {
+      if (a.readyState === WebSocket.OPEN) r.unshift(a);
+      continue;
+    }
+    startMatch(a, b, a.sport); // room uses the first player's sport
+  }
+  if ((privateRooms[code] || []).length === 0) delete privateRooms[code];
 }
 
 // Finish a match. winner = a socket, or null for a draw.
@@ -163,10 +194,23 @@ wss.on("connection", function (ws) {
       ws.playerId = String(msg.playerId || crypto.randomUUID());
       const sport = queues[msg.sport] ? msg.sport : "nba";
       ws.sport = sport;
+      ws.rating = typeof msg.rating === "number" ? msg.rating : 700;
       dequeue(ws);
-      queues[sport].push(ws);
-      send(ws, { type: "searching" });
-      tryMatch(sport);
+
+      if (msg.room) {
+        // Private match: only pair with someone using the same invite code.
+        const code = String(msg.room).toUpperCase().slice(0, 12);
+        ws.room = code;
+        if (!privateRooms[code]) privateRooms[code] = [];
+        privateRooms[code].push(ws);
+        send(ws, { type: "searching", room: code });
+        tryMatchRoom(code);
+      } else {
+        ws.room = null;
+        queues[sport].push(ws);
+        send(ws, { type: "searching" });
+        tryMatch(sport);
+      }
       return;
     }
 

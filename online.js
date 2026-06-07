@@ -1,24 +1,30 @@
 /* ============================================================
-   Sports Guesser — online ranked client.
+   Buzzr — online ranked client.
 
-   Talks to server/server.js over a WebSocket to find a real
-   opponent and race them. This file is self-contained: if the
-   server isn't reachable, nothing here breaks the offline game.
-
-   ⬇️ When you deploy the server, change this to your server's address.
-      Local testing:  ws://localhost:8080
-      Deployed (https site):  wss://your-server-address
+   Talks to the matchmaking server over a WebSocket to find a real
+   opponent and race them. Self-contained: if the server can't be
+   reached, it shows a friendly message and the rest of the game
+   keeps working.
    ============================================================ */
 
-const SERVER_URL = "ws://localhost:8080";
+// Your deployed matchmaking server (Render). wss = secure WebSocket.
+const SERVER_URL = "wss://buzzr-tbeq.onrender.com";
 
 let socket = null;
 let onlineOppGuesses = 0;
-let onlineRating = 1000;
+let onlineOppRating = 700;
+let currentRoom = null; // set when playing a private "invite a friend" match
 
-const findOnlineBtn = document.getElementById("find-online");
+/* ---------- Elements ---------- */
+const mmModal = document.getElementById("matchmaking-modal");
+const mmText = document.getElementById("mm-text");
+const mmCancel = document.getElementById("mm-cancel");
+const inviteBox = document.getElementById("invite-box");
+const inviteLink = document.getElementById("invite-link");
+const inviteCopy = document.getElementById("invite-copy");
+const inviteFriendBtn = document.getElementById("invite-friend");
 
-/* ---------- A stable anonymous id for this browser (no login) ---------- */
+/* ---------- A stable anonymous id for this browser ---------- */
 function getPlayerId() {
   let id = null;
   try {
@@ -36,16 +42,26 @@ function getPlayerId() {
   return id;
 }
 
-/* ---------- Connecting and messaging ---------- */
+function randomRoomCode() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no easily-confused chars
+  let s = "";
+  for (let i = 0; i < 5; i++) s += chars[Math.floor(Math.random() * chars.length)];
+  return s;
+}
 
+/* ---------- Connecting and messaging ---------- */
 function netSend(obj) {
   if (socket && socket.readyState === WebSocket.OPEN) {
     socket.send(JSON.stringify(obj));
   }
 }
 
-function findOnlineMatch() {
-  statusEl.textContent = "🌐 Connecting to the online server…";
+// roomCode = null for open matchmaking, or a code for a private friend match.
+function findOnlineMatch(roomCode) {
+  currentRoom = roomCode || null;
+  showMatchmaking();
+  mmText.textContent = "Connecting to the server…";
+
   if (socket && socket.readyState === WebSocket.OPEN) {
     queueNow();
     return;
@@ -59,20 +75,36 @@ function findOnlineMatch() {
   socket.addEventListener("open", queueNow);
   socket.addEventListener("message", (e) => handleServerMessage(JSON.parse(e.data)));
   socket.addEventListener("error", onNetError);
+  socket.addEventListener("close", () => {
+    if (!gameOver && mmModal.style.display !== "none") {
+      mmText.textContent = "Connection lost. The server may be waking up — try again.";
+    }
+  });
 }
 
 function queueNow() {
-  statusEl.textContent = "🔎 Searching for an opponent in " + SPORTS[sportKey].name + "…";
-  netSend({ type: "queue", playerId: getPlayerId(), sport: sportKey });
+  const msg = { type: "queue", playerId: getPlayerId(), sport: sportKey, rating: rank.rating };
+  if (currentRoom) {
+    msg.room = currentRoom;
+    showInvite(currentRoom);
+    mmText.textContent = "Waiting for your friend to join…";
+  } else {
+    inviteBox.style.display = "none";
+    mmText.textContent = "Searching for an opponent in " + SPORTS[sportKey].name + "…";
+  }
+  netSend(msg);
 }
 
 function onNetError() {
-  statusEl.textContent =
-    "⚠️ Couldn't reach the online server. Make sure it's running or deployed — you can still play Ranked vs the AI.";
+  mmText.textContent = "⚠️ Couldn't reach the server. It may be asleep — wait a few seconds and try again.";
 }
 
 function handleServerMessage(msg) {
-  if (msg.type === "matchFound") {
+  if (msg.type === "searching") {
+    if (currentRoom) mmText.textContent = "Waiting for your friend to join…";
+    else mmText.textContent = "Searching for an opponent in " + SPORTS[sportKey].name + "…";
+  } else if (msg.type === "matchFound") {
+    hideMatchmaking();
     startOnlineGame(msg.seed, msg.sport, msg.yourRating, msg.opponentRating);
   } else if (msg.type === "opponentProgress") {
     onlineOppGuesses = msg.guesses;
@@ -82,10 +114,27 @@ function handleServerMessage(msg) {
   }
 }
 
-/* ---------- Running an online match ---------- */
+/* ---------- Matchmaking modal ---------- */
+function showMatchmaking() {
+  inviteBox.style.display = "none";
+  mmModal.style.display = "flex";
+}
+function hideMatchmaking() {
+  mmModal.style.display = "none";
+}
+function showInvite(code) {
+  const base = location.origin + location.pathname;
+  inviteLink.value = base + "?room=" + code;
+  inviteBox.style.display = "";
+}
+function cancelMatchmaking() {
+  netSend({ type: "cancel" });
+  currentRoom = null;
+  hideMatchmaking();
+}
 
+/* ---------- Running an online match ---------- */
 function startOnlineGame(seed, sportName, yourRating, oppRating) {
-  // Make sure we're on the right sport (the server decides which).
   if (SPORTS[sportName]) {
     sportKey = sportName;
     sport = SPORTS[sportName];
@@ -96,6 +145,7 @@ function startOnlineGame(seed, sportName, yourRating, oppRating) {
   mode = "online";
   modeBtns.forEach((b) => b.classList.remove("active"));
   players = playable(sportKey);
+  if (typeof showView === "function") showView("game"); // leave the ranked lobby
 
   // Both browsers turn the SAME seed into the SAME secret player.
   const idx = ((seed % players.length) + players.length) % players.length;
@@ -109,10 +159,10 @@ function startOnlineGame(seed, sportName, yourRating, oppRating) {
   dropdown.innerHTML = "";
 
   onlineOppGuesses = 0;
-  onlineRating = yourRating;
+  onlineOppRating = typeof oppRating === "number" ? oppRating : 700;
   if (rankEl) {
     rankEl.style.display = "";
-    rankEl.textContent = "Online Rank: " + yourRating + "  (opponent " + oppRating + ")";
+    rankEl.textContent = "Online · " + tierOf(rank.rating) + " vs " + tierOf(onlineOppRating);
   }
   updateOnlineStatus();
 }
@@ -120,7 +170,7 @@ function startOnlineGame(seed, sportName, yourRating, oppRating) {
 function updateOnlineStatus() {
   statusEl.textContent =
     "🌐 Online " + sport.name + " race — " + guessesLeft + " guesses left · Opponent: " +
-    onlineOppGuesses + " guesses";
+    onlineOppGuesses + (onlineOppGuesses === 1 ? " guess" : " guesses");
 }
 
 // Called from game.js after each guess while in an online match.
@@ -138,44 +188,55 @@ function onlineAfterGuess(won) {
   }
 }
 
+// Apply Elo to YOUR browser-saved rank (server data is reset-proof this way).
+function applyOnlineElo(outcome) {
+  const score = outcome === "win" ? 1 : outcome === "draw" ? 0.5 : 0;
+  const expected = 1 / (1 + Math.pow(10, (onlineOppRating - rank.rating) / 400));
+  const before = rank.rating;
+  rank.rating = Math.round(rank.rating + 32 * (score - expected));
+  if (outcome === "win") rank.wins++;
+  else if (outcome === "loss") rank.losses++;
+  saveRank(rank);
+  return rank.rating - before;
+}
+
 function showOnlineResult(msg) {
   gameOver = true;
-  if (msg.outcome !== "win") revealSecret(); // show who it was at the bottom
-  onlineRating = msg.newRating;
-  const sign = msg.delta >= 0 ? "+" : "";
+  if (msg.outcome !== "win") revealSecret();
+
+  const delta = applyOnlineElo(msg.outcome);
+  const sign = delta >= 0 ? "+" : "";
   const label =
     msg.outcome === "win"
       ? "🏆 You won the race!"
       : msg.outcome === "draw"
       ? "🤝 Draw — nobody solved it."
       : "❌ Your opponent solved it first.";
-  statusEl.textContent = label + " It was " + secret.name + ". " + sign + msg.delta + " RP → " + msg.newRating;
-  if (rankEl) {
-    rankEl.style.display = "";
-    rankEl.textContent = "Online Rank: " + msg.newRating;
-  }
+  statusEl.textContent =
+    label + " It was " + secret.name + ". " + sign + delta + " RP · " + tierOf(rank.rating);
+  if (rankEl) rankEl.textContent = "Online · " + tierOf(rank.rating);
+  if (typeof onRankChanged === "function") onRankChanged();
 }
 
-/* ---------- Show the "Find Online Match" button only in Ranked mode ---------- */
-
-function updateOnlineButtonVisibility() {
-  if (!findOnlineBtn) return;
-  // Online PvP isn't deployed yet — keep this hidden so Ranked plays vs the rival.
-  findOnlineBtn.style.display = "none";
+/* ---------- Wiring ---------- */
+if (mmCancel) mmCancel.addEventListener("click", cancelMatchmaking);
+if (inviteCopy) {
+  inviteCopy.addEventListener("click", function () {
+    inviteLink.select();
+    try {
+      navigator.clipboard.writeText(inviteLink.value);
+    } catch (e) {
+      document.execCommand("copy");
+    }
+    inviteCopy.textContent = "Copied!";
+    setTimeout(() => (inviteCopy.textContent = "Copy"), 1500);
+  });
 }
+// (PLAY and Invite are wired in profile.js so they can require a username first.)
 
-if (findOnlineBtn) {
-  findOnlineBtn.addEventListener("click", findOnlineMatch);
-}
-
-// React to mode/sport buttons (these listeners run after game.js's own).
+// Leaving online mode mid-search? drop out of the server queue.
 modeBtns.forEach((b) =>
   b.addEventListener("click", function () {
-    // Leaving online mode while searching? tell the server to drop us from the queue.
     if (b.dataset.mode !== "online") netSend({ type: "cancel" });
-    updateOnlineButtonVisibility();
   })
 );
-tabs.forEach((t) => t.addEventListener("click", updateOnlineButtonVisibility));
-
-updateOnlineButtonVisibility();

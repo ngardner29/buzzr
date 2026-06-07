@@ -52,9 +52,20 @@ const changeUsername = document.getElementById("change-username");
 
 const rsportBtns = document.querySelectorAll(".rsport");
 const playRanked = document.getElementById("play-ranked");
+const inviteFriendBtn = document.getElementById("invite-friend");
 
 let selectedRankedSport = "nba";
-let pendingPlay = false; // set when we need a username before starting ranked
+let pendingAction = null; // run after the user picks a username (ranked needs a name)
+
+// Ranked needs a username (for your rank + badge). Prompt once, then run fn.
+function requireNameThen(fn) {
+  if (getUsername()) {
+    fn();
+    return;
+  }
+  pendingAction = fn;
+  openAccountModal();
+}
 
 /* ---------- Keeping the UI in sync ---------- */
 function refreshProfileUI() {
@@ -101,16 +112,10 @@ function setSport(key) {
   applyColumns();
 }
 
-function startRanked(online) {
+// Start online ranked. roomCode = null for open matchmaking, or a code for a friend match.
+function startOnlineRanked(roomCode) {
   setSport(selectedRankedSport);
-  showView("game");
-  if (online) {
-    findOnlineMatch();
-  } else {
-    mode = "ranked";
-    document.querySelectorAll(".mode-btn").forEach((b) => b.classList.remove("active"));
-    newGame();
-  }
+  findOnlineMatch(roomCode || null); // shows the matchmaking screen; switches to game on match
 }
 
 /* ---------- Account modal ---------- */
@@ -133,9 +138,10 @@ function saveUsername() {
   profileChip.style.display = "";
   refreshProfileUI();
   if (typeof cloudSync === "function") cloudSync(); // save new name to the cloud if logged in
-  if (pendingPlay) {
-    pendingPlay = false;
-    startRanked(false); // they set a name in order to play ranked — start now
+  if (pendingAction) {
+    const fn = pendingAction;
+    pendingAction = null;
+    fn(); // resume what they were trying to do (play / invite / join)
   }
 }
 
@@ -161,15 +167,12 @@ rsportBtns.forEach((b) =>
   })
 );
 
-playRanked.addEventListener("click", () => {
-  // Ranked needs a name for your rank + badge. Prompt once, then start.
-  if (!getUsername()) {
-    pendingPlay = true;
-    openAccountModal();
-    return;
-  }
-  startRanked(false);
-});
+playRanked.addEventListener("click", () => requireNameThen(() => startOnlineRanked(null)));
+if (inviteFriendBtn) {
+  inviteFriendBtn.addEventListener("click", () =>
+    requireNameThen(() => startOnlineRanked(randomRoomCode()))
+  );
+}
 
 /* ---------- Start ---------- */
 // Ranked + login launch later, so we don't prompt for a username on first visit.
@@ -178,4 +181,12 @@ const usingFirebase = typeof firebaseConfigured === "function" && firebaseConfig
 if (!usingFirebase && getUsername()) {
   profileChip.style.display = "";
   refreshProfileUI();
+}
+
+// If opened via an invite link (?room=CODE), jump straight into that friend match.
+const roomParam = new URLSearchParams(location.search).get("room");
+if (roomParam) {
+  const code = roomParam.toUpperCase().slice(0, 12);
+  openRanked();
+  requireNameThen(() => startOnlineRanked(code));
 }
