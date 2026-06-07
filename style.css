@@ -825,3 +825,12 @@ h1 {
   height: auto;
   margin-top: 20px;
 }
+
+/* Keep the game view centered so the tab bar hugs its buttons (not full width) */
+#view-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.tabs { width: fit-content; }

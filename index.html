@@ -103,7 +103,7 @@
       <div class="ranked-topbar">
         <button id="ranked-back" class="ranked-back">← Back</button>
 
-        <div class="ranked-profile" style="display:none">
+        <div class="ranked-profile">
           <button id="profile-toggle" class="profile-toggle">
             <img id="profile-badge-sm" class="profile-badge-sm" alt="rank" />
             <span id="profile-name-sm"></span>
@@ -121,12 +121,9 @@
 
       <div class="ranked-hero">
         <h2 class="ranked-title">RANKED</h2>
-        <div class="coming-soon">Coming Soon</div>
-        <p class="ranked-sub">Climb 8 tiers — Copper to Champion — by racing real players head-to-head.</p>
-        <img class="ranks-all" src="assets/ranks-all.png" alt="All Buzzr ranks" />
+        <p class="ranked-sub">Race a rival to crack the mystery player first. Win to climb Copper → Champion.</p>
 
-        <!-- The live ranked controls (hidden until Ranked launches) -->
-        <div id="ranked-live" style="display:none">
+        <div id="ranked-live">
           <img id="ranked-badge" class="ranked-badge" alt="your rank" />
           <div id="ranked-tier" class="ranked-tier">Copper</div>
           <div class="ranked-sports">
@@ -135,7 +132,7 @@
             <button class="rsport" data-sport="mlb">⚾ MLB</button>
           </div>
           <button id="play-ranked" class="play-btn">PLAY</button>
-          <button id="play-online" class="play-online">🌐 Play Online (beta)</button>
+          <a class="view-ranks" href="ranks.html">View all ranks →</a>
         </div>
       </div>
     </section>

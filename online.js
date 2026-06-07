@@ -160,7 +160,8 @@ function showOnlineResult(msg) {
 
 function updateOnlineButtonVisibility() {
   if (!findOnlineBtn) return;
-  findOnlineBtn.style.display = mode === "ranked" ? "" : "none";
+  // Online PvP isn't deployed yet — keep this hidden so Ranked plays vs the rival.
+  findOnlineBtn.style.display = "none";
 }
 
 if (findOnlineBtn) {

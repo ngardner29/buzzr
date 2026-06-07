@@ -52,9 +52,9 @@ const changeUsername = document.getElementById("change-username");
 
 const rsportBtns = document.querySelectorAll(".rsport");
 const playRanked = document.getElementById("play-ranked");
-const playOnline = document.getElementById("play-online");
 
 let selectedRankedSport = "nba";
+let pendingPlay = false; // set when we need a username before starting ranked
 
 /* ---------- Keeping the UI in sync ---------- */
 function refreshProfileUI() {
@@ -88,6 +88,7 @@ function showView(name) {
 
 function openRanked() {
   profileMenu.style.display = "none";
+  if (getUsername()) profileChip.style.display = "";
   refreshProfileUI();
   showView("ranked");
 }
@@ -132,6 +133,10 @@ function saveUsername() {
   profileChip.style.display = "";
   refreshProfileUI();
   if (typeof cloudSync === "function") cloudSync(); // save new name to the cloud if logged in
+  if (pendingPlay) {
+    pendingPlay = false;
+    startRanked(false); // they set a name in order to play ranked — start now
+  }
 }
 
 /* ---------- Wiring ---------- */
@@ -156,8 +161,15 @@ rsportBtns.forEach((b) =>
   })
 );
 
-playRanked.addEventListener("click", () => startRanked(false));
-playOnline.addEventListener("click", () => startRanked(true));
+playRanked.addEventListener("click", () => {
+  // Ranked needs a name for your rank + badge. Prompt once, then start.
+  if (!getUsername()) {
+    pendingPlay = true;
+    openAccountModal();
+    return;
+  }
+  startRanked(false);
+});
 
 /* ---------- Start ---------- */
 // Ranked + login launch later, so we don't prompt for a username on first visit.
