@@ -3864,7 +3864,7 @@ const NBA_PLAYERS = [
     "posGroup": "F",
     "height": 82,
     "heightDisplay": "6' 10\"",
-    "age": 22,
+    "age": 23,
     "jersey": 5,
     "weight": 240,
     "bats": "",
