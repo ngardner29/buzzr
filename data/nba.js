@@ -1082,6 +1082,24 @@ const NBA_PLAYERS = [
     "college": ""
   },
   {
+    "id": "4697268",
+    "name": "Kam Jones",
+    "team": "Bulls",
+    "teamFull": "Chicago Bulls",
+    "conference": "Eastern",
+    "division": "Central",
+    "position": "G",
+    "posGroup": "G",
+    "height": 76,
+    "heightDisplay": "6' 4\"",
+    "age": 24,
+    "jersey": null,
+    "weight": 200,
+    "bats": "",
+    "throws": "",
+    "college": "Marquette"
+  },
+  {
     "id": "4395626",
     "name": "Tre Jones",
     "team": "Bulls",
@@ -2252,24 +2270,6 @@ const NBA_PLAYERS = [
     "college": "Houston"
   },
   {
-    "id": "4432810",
-    "name": "Isaiah Stewart",
-    "team": "Pistons",
-    "teamFull": "Detroit Pistons",
-    "conference": "Eastern",
-    "division": "Central",
-    "position": "F",
-    "posGroup": "F",
-    "height": 80,
-    "heightDisplay": "6' 8\"",
-    "age": 25,
-    "jersey": 28,
-    "weight": 250,
-    "bats": "",
-    "throws": "",
-    "college": "Washington"
-  },
-  {
     "id": "4684742",
     "name": "Ausar Thompson",
     "team": "Pistons",
@@ -2844,24 +2844,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Texas A&M"
-  },
-  {
-    "id": "4697268",
-    "name": "Kam Jones",
-    "team": "Pacers",
-    "teamFull": "Indiana Pacers",
-    "conference": "Eastern",
-    "division": "Central",
-    "position": "G",
-    "posGroup": "G",
-    "height": 76,
-    "heightDisplay": "6' 4\"",
-    "age": 24,
-    "jersey": 7,
-    "weight": 200,
-    "bats": "",
-    "throws": "",
-    "college": "Marquette"
   },
   {
     "id": "2530530",
@@ -3762,6 +3744,24 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "UConn"
+  },
+  {
+    "id": "4432810",
+    "name": "Isaiah Stewart",
+    "team": "Grizzlies",
+    "teamFull": "Memphis Grizzlies",
+    "conference": "Western",
+    "division": "Southwest",
+    "position": "F",
+    "posGroup": "F",
+    "height": 80,
+    "heightDisplay": "6' 8\"",
+    "age": 25,
+    "jersey": null,
+    "weight": 250,
+    "bats": "",
+    "throws": "",
+    "college": "Washington"
   },
   {
     "id": "5112087",
