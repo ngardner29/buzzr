@@ -272,22 +272,22 @@ const NBA_PLAYERS = [
     "college": "UC Santa Barbara"
   },
   {
-    "id": "3917376",
-    "name": "Jaylen Brown",
+    "id": "3195",
+    "name": "Mike Conley",
     "team": "Celtics",
     "teamFull": "Boston Celtics",
     "conference": "Eastern",
     "division": "Atlantic",
     "position": "G",
     "posGroup": "G",
-    "height": 78,
-    "heightDisplay": "6' 6\"",
-    "age": 29,
-    "jersey": 7,
-    "weight": 223,
+    "height": 73,
+    "heightDisplay": "6' 1\"",
+    "age": 38,
+    "jersey": null,
+    "weight": 175,
     "bats": "",
     "throws": "",
-    "college": "California"
+    "college": "Ohio State"
   },
   {
     "id": "4277951",
@@ -306,6 +306,24 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Iowa"
+  },
+  {
+    "id": "4251",
+    "name": "Paul George",
+    "team": "Celtics",
+    "teamFull": "Boston Celtics",
+    "conference": "Eastern",
+    "division": "Atlantic",
+    "position": "F",
+    "posGroup": "F",
+    "height": 80,
+    "heightDisplay": "6' 8\"",
+    "age": 36,
+    "jersey": 8,
+    "weight": 220,
+    "bats": "",
+    "throws": "",
+    "college": "Fresno State"
   },
   {
     "id": "5175647",
@@ -380,6 +398,24 @@ const NBA_PLAYERS = [
     "college": "Utah State"
   },
   {
+    "id": "4351852",
+    "name": "Mitchell Robinson",
+    "team": "Celtics",
+    "teamFull": "Boston Celtics",
+    "conference": "Eastern",
+    "division": "Atlantic",
+    "position": "C",
+    "posGroup": "C",
+    "height": 84,
+    "heightDisplay": "7' 0\"",
+    "age": 28,
+    "jersey": null,
+    "weight": 240,
+    "bats": "",
+    "throws": "",
+    "college": ""
+  },
+  {
     "id": "4593841",
     "name": "Baylor Scheierman",
     "team": "Celtics",
@@ -414,24 +450,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Duke"
-  },
-  {
-    "id": "6478",
-    "name": "Nikola Vucevic",
-    "team": "Celtics",
-    "teamFull": "Boston Celtics",
-    "conference": "Eastern",
-    "division": "Atlantic",
-    "position": "C",
-    "posGroup": "C",
-    "height": 81,
-    "heightDisplay": "6' 9\"",
-    "age": 35,
-    "jersey": 4,
-    "weight": 260,
-    "bats": "",
-    "throws": "",
-    "college": "USC"
   },
   {
     "id": "4683689",
@@ -1190,6 +1208,24 @@ const NBA_PLAYERS = [
     "college": "Auburn"
   },
   {
+    "id": "2595516",
+    "name": "Norman Powell",
+    "team": "Bulls",
+    "teamFull": "Chicago Bulls",
+    "conference": "Eastern",
+    "division": "Central",
+    "position": "G",
+    "posGroup": "G",
+    "height": 76,
+    "heightDisplay": "6' 4\"",
+    "age": 33,
+    "jersey": null,
+    "weight": 215,
+    "bats": "",
+    "throws": "",
+    "college": "UCLA"
+  },
+  {
     "id": "4278076",
     "name": "Nick Richards",
     "team": "Bulls",
@@ -1206,24 +1242,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Kentucky"
-  },
-  {
-    "id": "4277811",
-    "name": "Collin Sexton",
-    "team": "Bulls",
-    "teamFull": "Chicago Bulls",
-    "conference": "Eastern",
-    "division": "Central",
-    "position": "G",
-    "posGroup": "G",
-    "height": 75,
-    "heightDisplay": "6' 3\"",
-    "age": 27,
-    "jersey": 2,
-    "weight": 190,
-    "bats": "",
-    "throws": "",
-    "college": "Alabama"
   },
   {
     "id": "4351851",
@@ -1514,22 +1532,22 @@ const NBA_PLAYERS = [
     "college": "California"
   },
   {
-    "id": "4277848",
-    "name": "Marvin Bagley III",
+    "id": "4593125",
+    "name": "Santi Aldama",
     "team": "Mavericks",
     "teamFull": "Dallas Mavericks",
     "conference": "Western",
     "division": "Southwest",
     "position": "F",
     "posGroup": "F",
-    "height": 82,
-    "heightDisplay": "6' 10\"",
-    "age": 27,
-    "jersey": 35,
-    "weight": 235,
+    "height": 84,
+    "heightDisplay": "7' 0\"",
+    "age": 25,
+    "jersey": null,
+    "weight": 215,
     "bats": "",
     "throws": "",
-    "college": "Duke"
+    "college": "Loyola Maryland"
   },
   {
     "id": "4432582",
@@ -1784,6 +1802,24 @@ const NBA_PLAYERS = [
     "college": "Arizona"
   },
   {
+    "id": "4277848",
+    "name": "Marvin Bagley III",
+    "team": "Nuggets",
+    "teamFull": "Denver Nuggets",
+    "conference": "Western",
+    "division": "Northwest",
+    "position": "F",
+    "posGroup": "F",
+    "height": 82,
+    "heightDisplay": "6' 10\"",
+    "age": 27,
+    "jersey": 35,
+    "weight": 235,
+    "bats": "",
+    "throws": "",
+    "college": "Duke"
+  },
+  {
     "id": "4431767",
     "name": "Christian Braun",
     "team": "Nuggets",
@@ -2036,6 +2072,24 @@ const NBA_PLAYERS = [
     "college": "UCLA"
   },
   {
+    "id": "3908845",
+    "name": "John Collins",
+    "team": "Pistons",
+    "teamFull": "Detroit Pistons",
+    "conference": "Eastern",
+    "division": "Central",
+    "position": "F",
+    "posGroup": "F",
+    "height": 81,
+    "heightDisplay": "6' 9\"",
+    "age": 28,
+    "jersey": null,
+    "weight": 226,
+    "bats": "",
+    "throws": "",
+    "college": "Wake Forest"
+  },
+  {
     "id": "4432166",
     "name": "Cade Cunningham",
     "team": "Pistons",
@@ -2088,24 +2142,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Radford"
-  },
-  {
-    "id": "6440",
-    "name": "Tobias Harris",
-    "team": "Pistons",
-    "teamFull": "Detroit Pistons",
-    "conference": "Eastern",
-    "division": "Central",
-    "position": "F",
-    "posGroup": "F",
-    "height": 80,
-    "heightDisplay": "6' 8\"",
-    "age": 33,
-    "jersey": 12,
-    "weight": 226,
-    "bats": "",
-    "throws": "",
-    "college": "Tennessee"
   },
   {
     "id": "4683771",
@@ -2738,6 +2774,24 @@ const NBA_PLAYERS = [
     "college": "Kentucky"
   },
   {
+    "id": "2990992",
+    "name": "Marcus Smart",
+    "team": "Rockets",
+    "teamFull": "Houston Rockets",
+    "conference": "Western",
+    "division": "Southwest",
+    "position": "G",
+    "posGroup": "G",
+    "height": 75,
+    "heightDisplay": "6' 3\"",
+    "age": 32,
+    "jersey": null,
+    "weight": 220,
+    "bats": "",
+    "throws": "",
+    "college": "Oklahoma State"
+  },
+  {
     "id": "4432639",
     "name": "Jabari Smith Jr.",
     "team": "Rockets",
@@ -2898,6 +2952,24 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Vanderbilt"
+  },
+  {
+    "id": "3133603",
+    "name": "Kelly Oubre Jr.",
+    "team": "Pacers",
+    "teamFull": "Indiana Pacers",
+    "conference": "Eastern",
+    "division": "Central",
+    "position": "G",
+    "posGroup": "G",
+    "height": 80,
+    "heightDisplay": "6' 8\"",
+    "age": 30,
+    "jersey": null,
+    "weight": 203,
+    "bats": "",
+    "throws": "",
+    "college": "Kansas"
   },
   {
     "id": "4703421",
@@ -3078,24 +3150,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": ""
-  },
-  {
-    "id": "3908845",
-    "name": "John Collins",
-    "team": "Clippers",
-    "teamFull": "LA Clippers",
-    "conference": "Western",
-    "division": "Pacific",
-    "position": "F",
-    "posGroup": "F",
-    "height": 81,
-    "heightDisplay": "6' 9\"",
-    "age": 28,
-    "jersey": 20,
-    "weight": 226,
-    "bats": "",
-    "throws": "",
-    "college": "Wake Forest"
   },
   {
     "id": "5106258",
@@ -3314,6 +3368,24 @@ const NBA_PLAYERS = [
     "college": ""
   },
   {
+    "id": "4397014",
+    "name": "Quentin Grimes",
+    "team": "Lakers",
+    "teamFull": "Los Angeles Lakers",
+    "conference": "Western",
+    "division": "Pacific",
+    "position": "G",
+    "posGroup": "G",
+    "height": 76,
+    "heightDisplay": "6' 4\"",
+    "age": 26,
+    "jersey": null,
+    "weight": 210,
+    "bats": "",
+    "throws": "",
+    "college": "Houston"
+  },
+  {
     "id": "4066648",
     "name": "Rui Hachimura",
     "team": "Lakers",
@@ -3368,6 +3440,24 @@ const NBA_PLAYERS = [
     "college": "Wake Forest"
   },
   {
+    "id": "4278580",
+    "name": "Sandro Mamukelashvili",
+    "team": "Lakers",
+    "teamFull": "Los Angeles Lakers",
+    "conference": "Western",
+    "division": "Pacific",
+    "position": "F",
+    "posGroup": "F",
+    "height": 81,
+    "heightDisplay": "6' 9\"",
+    "age": 27,
+    "jersey": null,
+    "weight": 240,
+    "bats": "",
+    "throws": "",
+    "college": "Seton Hall"
+  },
+  {
     "id": "4066457",
     "name": "Austin Reaves",
     "team": "Lakers",
@@ -3386,8 +3476,8 @@ const NBA_PLAYERS = [
     "college": "Oklahoma"
   },
   {
-    "id": "2990992",
-    "name": "Marcus Smart",
+    "id": "4277811",
+    "name": "Collin Sexton",
     "team": "Lakers",
     "teamFull": "Los Angeles Lakers",
     "conference": "Western",
@@ -3396,12 +3486,12 @@ const NBA_PLAYERS = [
     "posGroup": "G",
     "height": 75,
     "heightDisplay": "6' 3\"",
-    "age": 32,
-    "jersey": 36,
-    "weight": 220,
+    "age": 27,
+    "jersey": null,
+    "weight": 190,
     "bats": "",
     "throws": "",
-    "college": "Oklahoma State"
+    "college": "Alabama"
   },
   {
     "id": "4683686",
@@ -3438,24 +3528,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Kentucky"
-  },
-  {
-    "id": "4593125",
-    "name": "Santi Aldama",
-    "team": "Grizzlies",
-    "teamFull": "Memphis Grizzlies",
-    "conference": "Western",
-    "division": "Southwest",
-    "position": "F",
-    "posGroup": "F",
-    "height": 84,
-    "heightDisplay": "7' 0\"",
-    "age": 25,
-    "jersey": 7,
-    "weight": 215,
-    "bats": "",
-    "throws": "",
-    "college": "Loyola Maryland"
   },
   {
     "id": "2581018",
@@ -3908,24 +3980,6 @@ const NBA_PLAYERS = [
     "college": "Arkansas"
   },
   {
-    "id": "2595516",
-    "name": "Norman Powell",
-    "team": "Heat",
-    "teamFull": "Miami Heat",
-    "conference": "Eastern",
-    "division": "Southeast",
-    "position": "G",
-    "posGroup": "G",
-    "height": 76,
-    "heightDisplay": "6' 4\"",
-    "age": 33,
-    "jersey": 24,
-    "weight": 215,
-    "bats": "",
-    "throws": "",
-    "college": "UCLA"
-  },
-  {
     "id": "4066993",
     "name": "Dru Smith",
     "team": "Heat",
@@ -4302,24 +4356,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "UCLA"
-  },
-  {
-    "id": "3195",
-    "name": "Mike Conley",
-    "team": "Timberwolves",
-    "teamFull": "Minnesota Timberwolves",
-    "conference": "Western",
-    "division": "Northwest",
-    "position": "G",
-    "posGroup": "G",
-    "height": 73,
-    "heightDisplay": "6' 1\"",
-    "age": 38,
-    "jersey": 10,
-    "weight": 175,
-    "bats": "",
-    "throws": "",
-    "college": "Ohio State"
   },
   {
     "id": "3934673",
@@ -4862,24 +4898,6 @@ const NBA_PLAYERS = [
     "college": "West Virginia"
   },
   {
-    "id": "4351852",
-    "name": "Mitchell Robinson",
-    "team": "Knicks",
-    "teamFull": "New York Knicks",
-    "conference": "Eastern",
-    "division": "Atlantic",
-    "position": "C",
-    "posGroup": "C",
-    "height": 84,
-    "heightDisplay": "7' 0\"",
-    "age": 28,
-    "jersey": 23,
-    "weight": 240,
-    "bats": "",
-    "throws": "",
-    "college": ""
-  },
-  {
     "id": "3914044",
     "name": "Landry Shamet",
     "team": "Knicks",
@@ -5348,6 +5366,24 @@ const NBA_PLAYERS = [
     "college": "Gonzaga"
   },
   {
+    "id": "6478",
+    "name": "Nikola Vucevic",
+    "team": "Magic",
+    "teamFull": "Orlando Magic",
+    "conference": "Eastern",
+    "division": "Southeast",
+    "position": "C",
+    "posGroup": "C",
+    "height": 81,
+    "heightDisplay": "6' 9\"",
+    "age": 35,
+    "jersey": null,
+    "weight": 260,
+    "bats": "",
+    "throws": "",
+    "college": "USC"
+  },
+  {
     "id": "4566434",
     "name": "Franz Wagner",
     "team": "Magic",
@@ -5418,6 +5454,24 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "UCLA"
+  },
+  {
+    "id": "3917376",
+    "name": "Jaylen Brown",
+    "team": "76ers",
+    "teamFull": "Philadelphia 76ers",
+    "conference": "Eastern",
+    "division": "Atlantic",
+    "position": "G",
+    "posGroup": "G",
+    "height": 78,
+    "heightDisplay": "6' 6\"",
+    "age": 29,
+    "jersey": 7,
+    "weight": 223,
+    "bats": "",
+    "throws": "",
+    "college": "California"
   },
   {
     "id": "6585",
@@ -5492,42 +5546,6 @@ const NBA_PLAYERS = [
     "college": "Kansas"
   },
   {
-    "id": "4251",
-    "name": "Paul George",
-    "team": "76ers",
-    "teamFull": "Philadelphia 76ers",
-    "conference": "Eastern",
-    "division": "Atlantic",
-    "position": "F",
-    "posGroup": "F",
-    "height": 80,
-    "heightDisplay": "6' 8\"",
-    "age": 36,
-    "jersey": 8,
-    "weight": 220,
-    "bats": "",
-    "throws": "",
-    "college": "Fresno State"
-  },
-  {
-    "id": "4397014",
-    "name": "Quentin Grimes",
-    "team": "76ers",
-    "teamFull": "Philadelphia 76ers",
-    "conference": "Eastern",
-    "division": "Atlantic",
-    "position": "G",
-    "posGroup": "G",
-    "height": 76,
-    "heightDisplay": "6' 4\"",
-    "age": 26,
-    "jersey": 5,
-    "weight": 210,
-    "bats": "",
-    "throws": "",
-    "college": "Houston"
-  },
-  {
     "id": "4397179",
     "name": "Tyrese Martin",
     "team": "76ers",
@@ -5562,24 +5580,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Kentucky"
-  },
-  {
-    "id": "3133603",
-    "name": "Kelly Oubre Jr.",
-    "team": "76ers",
-    "teamFull": "Philadelphia 76ers",
-    "conference": "Eastern",
-    "division": "Atlantic",
-    "position": "G",
-    "posGroup": "G",
-    "height": 80,
-    "heightDisplay": "6' 8\"",
-    "age": 30,
-    "jersey": 9,
-    "weight": 203,
-    "bats": "",
-    "throws": "",
-    "college": "Kansas"
   },
   {
     "id": "3912848",
@@ -6410,6 +6410,24 @@ const NBA_PLAYERS = [
     "college": "Rutgers"
   },
   {
+    "id": "6440",
+    "name": "Tobias Harris",
+    "team": "Spurs",
+    "teamFull": "San Antonio Spurs",
+    "conference": "Western",
+    "division": "Southwest",
+    "position": "F",
+    "posGroup": "F",
+    "height": 80,
+    "heightDisplay": "6' 8\"",
+    "age": 33,
+    "jersey": null,
+    "weight": 226,
+    "bats": "",
+    "throws": "",
+    "college": "Tennessee"
+  },
+  {
     "id": "4395723",
     "name": "Keldon Johnson",
     "team": "Spurs",
@@ -6534,24 +6552,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "San Diego State"
-  },
-  {
-    "id": "4278580",
-    "name": "Sandro Mamukelashvili",
-    "team": "Raptors",
-    "teamFull": "Toronto Raptors",
-    "conference": "Eastern",
-    "division": "Atlantic",
-    "position": "F",
-    "posGroup": "F",
-    "height": 81,
-    "heightDisplay": "6' 9\"",
-    "age": 27,
-    "jersey": 54,
-    "weight": 240,
-    "bats": "",
-    "throws": "",
-    "college": "Seton Hall"
   },
   {
     "id": "5093267",
