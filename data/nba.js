@@ -722,24 +722,6 @@ const NBA_PLAYERS = [
     "college": "North Carolina"
   },
   {
-    "id": "4397784",
-    "name": "Malachi Smith",
-    "team": "Nets",
-    "teamFull": "Brooklyn Nets",
-    "conference": "Eastern",
-    "division": "Atlantic",
-    "position": "G",
-    "posGroup": "G",
-    "height": 76,
-    "heightDisplay": "6' 4\"",
-    "age": 26,
-    "jersey": 18,
-    "weight": 205,
-    "bats": "",
-    "throws": "",
-    "college": "Gonzaga"
-  },
-  {
     "id": "5279130",
     "name": "Nolan Traore",
     "team": "Nets",
@@ -5832,6 +5814,24 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Murray State"
+  },
+  {
+    "id": "4066399",
+    "name": "Micah Potter",
+    "team": "Trail Blazers",
+    "teamFull": "Portland Trail Blazers",
+    "conference": "Western",
+    "division": "Northwest",
+    "position": "C",
+    "posGroup": "C",
+    "height": 81,
+    "heightDisplay": "6' 9\"",
+    "age": 28,
+    "jersey": 11,
+    "weight": 248,
+    "bats": "",
+    "throws": "",
+    "college": "Wisconsin"
   },
   {
     "id": "4914336",
