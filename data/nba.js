@@ -74,6 +74,24 @@ const NBA_PLAYERS = [
     "college": "Baylor"
   },
   {
+    "id": "4397020",
+    "name": "Luguentz Dort",
+    "team": "Hawks",
+    "teamFull": "Atlanta Hawks",
+    "conference": "Eastern",
+    "division": "Southeast",
+    "position": "G",
+    "posGroup": "G",
+    "height": 76,
+    "heightDisplay": "6' 4\"",
+    "age": 27,
+    "jersey": 5,
+    "weight": 220,
+    "bats": "",
+    "throws": "",
+    "college": "Arizona State"
+  },
+  {
     "id": "4712863",
     "name": "Mouhamed Gueye",
     "team": "Hawks",
@@ -200,6 +218,24 @@ const NBA_PLAYERS = [
     "college": "Lehigh"
   },
   {
+    "id": "4433629",
+    "name": "Ryan Nembhard",
+    "team": "Hawks",
+    "teamFull": "Atlanta Hawks",
+    "conference": "Eastern",
+    "division": "Southeast",
+    "position": "G",
+    "posGroup": "G",
+    "height": 71,
+    "heightDisplay": "5' 11\"",
+    "age": 23,
+    "jersey": 9,
+    "weight": 180,
+    "bats": "",
+    "throws": "",
+    "college": "Gonzaga"
+  },
+  {
     "id": "4431680",
     "name": "Onyeka Okongwu",
     "team": "Hawks",
@@ -216,24 +252,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "USC"
-  },
-  {
-    "id": "5211175",
-    "name": "Zaccharie Risacher",
-    "team": "Hawks",
-    "teamFull": "Atlanta Hawks",
-    "conference": "Eastern",
-    "division": "Southeast",
-    "position": "F",
-    "posGroup": "F",
-    "height": 80,
-    "heightDisplay": "6' 8\"",
-    "age": 21,
-    "jersey": 10,
-    "weight": 200,
-    "bats": "",
-    "throws": "",
-    "college": ""
   },
   {
     "id": "4397183",
@@ -1532,24 +1550,6 @@ const NBA_PLAYERS = [
     "college": "Nevada"
   },
   {
-    "id": "4433629",
-    "name": "Ryan Nembhard",
-    "team": "Mavericks",
-    "teamFull": "Dallas Mavericks",
-    "conference": "Western",
-    "division": "Southwest",
-    "position": "G",
-    "posGroup": "G",
-    "height": 71,
-    "heightDisplay": "5' 11\"",
-    "age": 23,
-    "jersey": 9,
-    "weight": 180,
-    "bats": "",
-    "throws": "",
-    "college": "Gonzaga"
-  },
-  {
     "id": "4898238",
     "name": "John Poulakidas",
     "team": "Mavericks",
@@ -1566,6 +1566,24 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Yale"
+  },
+  {
+    "id": "5211175",
+    "name": "Zaccharie Risacher",
+    "team": "Mavericks",
+    "teamFull": "Dallas Mavericks",
+    "conference": "Western",
+    "division": "Southwest",
+    "position": "F",
+    "posGroup": "F",
+    "height": 80,
+    "heightDisplay": "6' 8\"",
+    "age": 21,
+    "jersey": 10,
+    "weight": 200,
+    "bats": "",
+    "throws": "",
+    "college": ""
   },
   {
     "id": "4432107",
@@ -3522,7 +3540,7 @@ const NBA_PLAYERS = [
     "posGroup": "C",
     "height": 81,
     "heightDisplay": "6' 9\"",
-    "age": 28,
+    "age": 29,
     "jersey": 13,
     "weight": 260,
     "bats": "",
@@ -4608,24 +4626,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Texas A&M"
-  },
-  {
-    "id": "4397020",
-    "name": "Luguentz Dort",
-    "team": "Thunder",
-    "teamFull": "Oklahoma City Thunder",
-    "conference": "Western",
-    "division": "Northwest",
-    "position": "G",
-    "posGroup": "G",
-    "height": 76,
-    "heightDisplay": "6' 4\"",
-    "age": 27,
-    "jersey": 5,
-    "weight": 220,
-    "bats": "",
-    "throws": "",
-    "college": "Arizona State"
   },
   {
     "id": "4278073",
