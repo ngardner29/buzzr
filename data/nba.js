@@ -3206,24 +3206,6 @@ const NBA_PLAYERS = [
     "college": "Stanford"
   },
   {
-    "id": "2581018",
-    "name": "Kentavious Caldwell-Pope",
-    "team": "Grizzlies",
-    "teamFull": "Memphis Grizzlies",
-    "conference": "Western",
-    "division": "Southwest",
-    "position": "G",
-    "posGroup": "G",
-    "height": 77,
-    "heightDisplay": "6' 5\"",
-    "age": 33,
-    "jersey": 3,
-    "weight": 204,
-    "bats": "",
-    "throws": "",
-    "college": "Georgia"
-  },
-  {
     "id": "4896372",
     "name": "Walter Clayton Jr.",
     "team": "Grizzlies",
@@ -5078,6 +5060,24 @@ const NBA_PLAYERS = [
     "college": "California"
   },
   {
+    "id": "2581018",
+    "name": "Kentavious Caldwell-Pope",
+    "team": "76ers",
+    "teamFull": "Philadelphia 76ers",
+    "conference": "Eastern",
+    "division": "Atlantic",
+    "position": "G",
+    "posGroup": "G",
+    "height": 77,
+    "heightDisplay": "6' 5\"",
+    "age": 33,
+    "jersey": null,
+    "weight": 204,
+    "bats": "",
+    "throws": "",
+    "college": "Georgia"
+  },
+  {
     "id": "5124612",
     "name": "VJ Edgecombe",
     "team": "76ers",
@@ -6600,7 +6600,7 @@ const NBA_PLAYERS = [
     "posGroup": "G",
     "height": 79,
     "heightDisplay": "6' 7\"",
-    "age": 21,
+    "age": 22,
     "jersey": 0,
     "weight": 195,
     "bats": "",
