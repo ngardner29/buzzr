@@ -714,7 +714,7 @@ const NBA_PLAYERS = [
     "posGroup": "G",
     "height": 75,
     "heightDisplay": "6' 3\"",
-    "age": 30,
+    "age": 31,
     "jersey": 8,
     "weight": 198,
     "bats": "",
@@ -990,6 +990,24 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": ""
+  },
+  {
+    "id": "4683750",
+    "name": "Jordan Hawkins",
+    "team": "Bulls",
+    "teamFull": "Chicago Bulls",
+    "conference": "Eastern",
+    "division": "Central",
+    "position": "G",
+    "posGroup": "G",
+    "height": 77,
+    "heightDisplay": "6' 5\"",
+    "age": 24,
+    "jersey": null,
+    "weight": 190,
+    "bats": "",
+    "throws": "",
+    "college": "UConn"
   },
   {
     "id": "2990984",
@@ -3186,24 +3204,6 @@ const NBA_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Syracuse"
-  },
-  {
-    "id": "4683750",
-    "name": "Jordan Hawkins",
-    "team": "Grizzlies",
-    "teamFull": "Memphis Grizzlies",
-    "conference": "Western",
-    "division": "Southwest",
-    "position": "G",
-    "posGroup": "G",
-    "height": 77,
-    "heightDisplay": "6' 5\"",
-    "age": 24,
-    "jersey": 19,
-    "weight": 190,
-    "bats": "",
-    "throws": "",
-    "college": "UConn"
   },
   {
     "id": "4684806",
