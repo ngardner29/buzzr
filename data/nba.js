@@ -3577,7 +3577,7 @@ const NBA_PLAYERS = [
     "height": 72,
     "heightDisplay": "6' 0\"",
     "age": 28,
-    "jersey": 45,
+    "jersey": 2,
     "weight": 210,
     "bats": "",
     "throws": "",

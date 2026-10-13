@@ -66,7 +66,7 @@ const MLB_PLAYERS = [
     "posGroup": "IF",
     "height": 72,
     "heightDisplay": "6' 0\"",
-    "age": 32,
+    "age": 33,
     "jersey": 4,
     "weight": 210,
     "bats": "B",
