@@ -20,24 +20,6 @@ const NFL_PLAYERS = [
     "college": "BYU"
   },
   {
-    "id": "3045523",
-    "name": "Kendrick Bourne",
-    "team": "Cardinals",
-    "teamFull": "Arizona Cardinals",
-    "conference": "NFC",
-    "division": "West",
-    "position": "WR",
-    "posGroup": "OFF",
-    "height": 73,
-    "heightDisplay": "6' 1\"",
-    "age": 31,
-    "jersey": 17,
-    "weight": 205,
-    "bats": "",
-    "throws": "",
-    "college": "Eastern Washington"
-  },
-  {
     "id": "2578570",
     "name": "Jacoby Brissett",
     "team": "Cardinals",
@@ -162,6 +144,24 @@ const NFL_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Stanford"
+  },
+  {
+    "id": "3045523",
+    "name": "Kendrick Bourne",
+    "team": "Cardinals",
+    "teamFull": "Arizona Cardinals",
+    "conference": "NFC",
+    "division": "West",
+    "position": "WR",
+    "posGroup": "OFF",
+    "height": 73,
+    "heightDisplay": "6' 1\"",
+    "age": 31,
+    "jersey": 17,
+    "weight": 205,
+    "bats": "",
+    "throws": "",
+    "college": "Eastern Washington"
   },
   {
     "id": "4369886",
