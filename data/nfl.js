@@ -20,24 +20,6 @@ const NFL_PLAYERS = [
     "college": "BYU"
   },
   {
-    "id": "2578570",
-    "name": "Jacoby Brissett",
-    "team": "Cardinals",
-    "teamFull": "Arizona Cardinals",
-    "conference": "NFC",
-    "division": "West",
-    "position": "QB",
-    "posGroup": "OFF",
-    "height": 76,
-    "heightDisplay": "6' 4\"",
-    "age": 33,
-    "jersey": 7,
-    "weight": 235,
-    "bats": "",
-    "throws": "",
-    "college": "NC State"
-  },
-  {
     "id": "4039050",
     "name": "Devin Duvernay",
     "team": "Cardinals",
@@ -66,7 +48,7 @@ const NFL_PLAYERS = [
     "posGroup": "OFF",
     "height": 76,
     "heightDisplay": "6' 4\"",
-    "age": 28,
+    "age": 29,
     "jersey": 80,
     "weight": 225,
     "bats": "",
@@ -378,6 +360,24 @@ const NFL_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Minnesota"
+  },
+  {
+    "id": "2578570",
+    "name": "Jacoby Brissett",
+    "team": "Ravens",
+    "teamFull": "Baltimore Ravens",
+    "conference": "AFC",
+    "division": "North",
+    "position": "QB",
+    "posGroup": "OFF",
+    "height": 76,
+    "heightDisplay": "6' 4\"",
+    "age": 33,
+    "jersey": null,
+    "weight": 235,
+    "bats": "",
+    "throws": "",
+    "college": "NC State"
   },
   {
     "id": "4876132",
