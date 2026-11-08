@@ -373,7 +373,7 @@ const NFL_PLAYERS = [
     "height": 76,
     "heightDisplay": "6' 4\"",
     "age": 33,
-    "jersey": null,
+    "jersey": 11,
     "weight": 235,
     "bats": "",
     "throws": "",
