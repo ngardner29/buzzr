@@ -2108,24 +2108,6 @@ const NFL_PLAYERS = [
     "college": "VCU"
   },
   {
-    "id": "15818",
-    "name": "Keenan Allen",
-    "team": "Colts",
-    "teamFull": "Indianapolis Colts",
-    "conference": "AFC",
-    "division": "South",
-    "position": "WR",
-    "posGroup": "OFF",
-    "height": 74,
-    "heightDisplay": "6' 2\"",
-    "age": 34,
-    "jersey": 10,
-    "weight": 211,
-    "bats": "",
-    "throws": "",
-    "college": "California"
-  },
-  {
     "id": "4683151",
     "name": "Deion Burks",
     "team": "Colts",
@@ -2142,24 +2124,6 @@ const NFL_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Oklahoma"
-  },
-  {
-    "id": "4688813",
-    "name": "Josh Downs",
-    "team": "Colts",
-    "teamFull": "Indianapolis Colts",
-    "conference": "AFC",
-    "division": "South",
-    "position": "WR",
-    "posGroup": "OFF",
-    "height": 69,
-    "heightDisplay": "5' 9\"",
-    "age": 25,
-    "jersey": 2,
-    "weight": 171,
-    "bats": "",
-    "throws": "",
-    "college": "North Carolina"
   },
   {
     "id": "3917792",
@@ -2370,7 +2334,7 @@ const NFL_PLAYERS = [
     "posGroup": "OFF",
     "height": 74,
     "heightDisplay": "6' 2\"",
-    "age": 29,
+    "age": 30,
     "jersey": 3,
     "weight": 200,
     "bats": "",
@@ -2522,6 +2486,24 @@ const NFL_PLAYERS = [
     "college": "Clemson"
   },
   {
+    "id": "4688813",
+    "name": "Josh Downs",
+    "team": "Chiefs",
+    "teamFull": "Kansas City Chiefs",
+    "conference": "AFC",
+    "division": "West",
+    "position": "WR",
+    "posGroup": "OFF",
+    "height": 69,
+    "heightDisplay": "5' 9\"",
+    "age": 25,
+    "jersey": 2,
+    "weight": 171,
+    "bats": "",
+    "throws": "",
+    "college": "North Carolina"
+  },
+  {
     "id": "4240472",
     "name": "Noah Gray",
     "team": "Chiefs",
@@ -2664,24 +2646,6 @@ const NFL_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Texas"
-  },
-  {
-    "id": "14880",
-    "name": "Kirk Cousins",
-    "team": "Raiders",
-    "teamFull": "Las Vegas Raiders",
-    "conference": "AFC",
-    "division": "West",
-    "position": "QB",
-    "posGroup": "OFF",
-    "height": 75,
-    "heightDisplay": "6' 3\"",
-    "age": 38,
-    "jersey": 8,
-    "weight": 209,
-    "bats": "",
-    "throws": "",
-    "college": "Michigan State"
   },
   {
     "id": "4890973",
@@ -3044,24 +3008,6 @@ const NFL_PLAYERS = [
     "college": "Georgia"
   },
   {
-    "id": "4569382",
-    "name": "Jordan Whittington",
-    "team": "Rams",
-    "teamFull": "Los Angeles Rams",
-    "conference": "NFC",
-    "division": "West",
-    "position": "WR",
-    "posGroup": "OFF",
-    "height": 73,
-    "heightDisplay": "6' 1\"",
-    "age": 26,
-    "jersey": 88,
-    "weight": 202,
-    "bats": "",
-    "throws": "",
-    "college": "Texas"
-  },
-  {
     "id": "4430737",
     "name": "Kyren Williams",
     "team": "Rams",
@@ -3078,6 +3024,24 @@ const NFL_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Notre Dame"
+  },
+  {
+    "id": "4569382",
+    "name": "Jordan Whittington",
+    "team": "Rams",
+    "teamFull": "Los Angeles Rams",
+    "conference": "NFC",
+    "division": "West",
+    "position": "WR",
+    "posGroup": "OFF",
+    "height": 73,
+    "heightDisplay": "6' 1\"",
+    "age": 26,
+    "jersey": 88,
+    "weight": 202,
+    "bats": "",
+    "throws": "",
+    "college": "Texas"
   },
   {
     "id": "4869961",
@@ -3240,6 +3204,24 @@ const NFL_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Pittsburgh"
+  },
+  {
+    "id": "14880",
+    "name": "Kirk Cousins",
+    "team": "Vikings",
+    "teamFull": "Minnesota Vikings",
+    "conference": "NFC",
+    "division": "North",
+    "position": "QB",
+    "posGroup": "OFF",
+    "height": 75,
+    "heightDisplay": "6' 3\"",
+    "age": 38,
+    "jersey": 8,
+    "weight": 209,
+    "bats": "",
+    "throws": "",
+    "college": "Michigan State"
   },
   {
     "id": "4240631",
@@ -4014,6 +3996,24 @@ const NFL_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Iowa"
+  },
+  {
+    "id": "15818",
+    "name": "Keenan Allen",
+    "team": "49ers",
+    "teamFull": "San Francisco 49ers",
+    "conference": "NFC",
+    "division": "West",
+    "position": "WR",
+    "posGroup": "OFF",
+    "height": 74,
+    "heightDisplay": "6' 2\"",
+    "age": 34,
+    "jersey": null,
+    "weight": 211,
+    "bats": "",
+    "throws": "",
+    "college": "California"
   },
   {
     "id": "4696044",
