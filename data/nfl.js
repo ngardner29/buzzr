@@ -2090,24 +2090,6 @@ const NFL_PLAYERS = [
     "college": "Ohio State"
   },
   {
-    "id": "2998565",
-    "name": "Mo Alie-Cox",
-    "team": "Colts",
-    "teamFull": "Indianapolis Colts",
-    "conference": "AFC",
-    "division": "South",
-    "position": "TE",
-    "posGroup": "OFF",
-    "height": 77,
-    "heightDisplay": "6' 5\"",
-    "age": 33,
-    "jersey": 81,
-    "weight": 267,
-    "bats": "",
-    "throws": "",
-    "college": "VCU"
-  },
-  {
     "id": "4683151",
     "name": "Deion Burks",
     "team": "Colts",
@@ -2214,6 +2196,24 @@ const NFL_PLAYERS = [
     "bats": "",
     "throws": "",
     "college": "Ole Miss"
+  },
+  {
+    "id": "2998565",
+    "name": "Mo Alie-Cox",
+    "team": "Colts",
+    "teamFull": "Indianapolis Colts",
+    "conference": "AFC",
+    "division": "South",
+    "position": "TE",
+    "posGroup": "OFF",
+    "height": 77,
+    "heightDisplay": "6' 5\"",
+    "age": 33,
+    "jersey": 81,
+    "weight": 267,
+    "bats": "",
+    "throws": "",
+    "college": "VCU"
   },
   {
     "id": "2576336",
